@@ -65,6 +65,39 @@ html { scroll-behavior: smooth; }
 .rank-3 { background: rgba(206,14,45,0.4); color: white; }
 .rank-n { background: rgba(255,255,255,0.05); color: #999; }
 
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0; width: 200px; z-index: 40;
+  padding: 120px 0 40px;
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(13,13,13,0.85);
+  border-right: 1px solid rgba(255,255,255,0.04);
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+}
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 24px; font-size: 13px; color: #666; font-weight: 300;
+  transition: all 0.3s ease;
+  border-left: 2px solid transparent; letter-spacing: 0.05em;
+  text-decoration: none;
+}
+.sidebar-link:hover { color: #ccc; background: rgba(255,255,255,0.02); }
+.sidebar-link.active {
+  color: #fff; border-left-color: #CE0E2D;
+  background: rgba(206,14,45,0.06);
+}
+.sidebar-dot {
+  width: 4px; height: 4px; min-width: 4px; border-radius: 50%;
+  background: currentColor; opacity: 0.3; transition: all 0.3s ease;
+}
+.sidebar-link.active .sidebar-dot { opacity: 1; background: #CE0E2D; box-shadow: 0 0 8px rgba(206,14,45,0.5); }
+.sidebar-section {
+  padding-left: 24px; margin-top: 16px; margin-bottom: 4px;
+  font-size: 10px; letter-spacing: 0.15em; color: #444; font-weight: 400;
+}
+@media (max-width: 1023px) { .sidebar { display: none; } }
+
 @media print {
   body { background: white !important; color: #111 !important; }
   .bg-hw-dark { background: white !important; }
@@ -94,6 +127,19 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 </nav>
+
+<!-- ==================== 左侧竖直导航 ==================== -->
+<aside class="sidebar">
+  <div class="sidebar-section">报告章节</div>
+  <a href="#method" class="sidebar-link"><span class="sidebar-dot"></span>研究方法</a>
+  <a href="#category" class="sidebar-link"><span class="sidebar-dot"></span>主题分类</a>
+  <a href="#visual" class="sidebar-link"><span class="sidebar-dot"></span>视觉风格</a>
+  <a href="#features" class="sidebar-link"><span class="sidebar-dot"></span>功能矩阵</a>
+  <a href="#deepdive" class="sidebar-link"><span class="sidebar-dot"></span>代表深挖</a>
+  <a href="#gap" class="sidebar-link"><span class="sidebar-dot"></span>差距分析</a>
+</aside>
+
+<div class="lg:ml-[200px]">
 
 <!-- ==================== Hero ==================== -->
 <header class="pt-40 pb-24 px-8 text-center" style="background: radial-gradient(ellipse 80% 60% at 50% 30%, #1A1015 0%, #0D0D0D 55%, #0A0A10 100%);">
@@ -840,6 +886,29 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 </footer>
+
+</div><!-- /lg:ml-[200px] -->
+
+<script>
+(function(){
+  const links = document.querySelectorAll('.sidebar-link');
+  const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+
+  function update(){
+    const scrollY = window.scrollY + 120;
+    let current = sections[0];
+    for (const sec of sections) {
+      if (sec && sec.offsetTop <= scrollY) current = sec;
+    }
+    links.forEach(l => l.classList.remove('active'));
+    const active = document.querySelector(`.sidebar-link[href="#${current.id}"]`);
+    if (active) active.classList.add('active');
+  }
+
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
 
 </body>
 </html>
