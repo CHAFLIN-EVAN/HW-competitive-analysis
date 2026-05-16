@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>华为主题创新设计 · HarmonyOS 主题商店 Top50 竞品分析</title>
+<title>竞品分析 · 系统角色视角下的 HarmonyOS 主题商店 Top 50</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <script>
@@ -11,16 +11,18 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        hw: { red: '#CE0E2D', gold: '#C9A063', dark: '#0D0D0D', card: '#18181B' }
+        amber: { 400: '#D4A574', 500: '#C18D5A', 600: '#A87040' }
       },
       animation: {
-        'slide-up': 'slideUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards',
+        'fade-up': 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards',
         'fade-in': 'fadeIn 0.6s ease forwards',
+        'breathe': 'breathe 8s ease-in-out infinite',
         'bar-grow': 'barGrow 1.2s cubic-bezier(0.16,1,0.3,1) forwards',
       },
       keyframes: {
-        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+        fadeUp: { '0%': { transform: 'translateY(24px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
         fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        breathe: { '0%,100%': { opacity: '0.3' }, '50%': { opacity: '0.7' } },
         barGrow: { '0%': { width: '0%' }, '100%': {} },
       }
     }
@@ -28,874 +30,783 @@ tailwind.config = {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap');
 * { font-family: 'Noto Sans SC', 'Inter', sans-serif; }
 html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0D0D0D; }
-::-webkit-scrollbar-thumb { background: #2A2A2E; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #0A0A0C; }
+::-webkit-scrollbar-thumb { background: #1E1E22; border-radius: 2px; }
 
-.hw-gradient-text {
-  background: linear-gradient(135deg, #E8203B, #CE0E2D);
+.serif { font-family: 'Noto Serif SC', serif; }
+
+.amber-gradient {
+  background: linear-gradient(135deg, #D4A574, #C18D5A, #E8C9A0);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
-.glass {
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  background: rgba(24,24,27,0.7);
-}
-
-.card-lift {
-  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-}
-.card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
-}
-
-.hw-table tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
-.hw-table tr:last-child { border-bottom: none; }
-.hw-table td, .hw-table th { padding: 14px 18px; font-size: 13px; }
-.hw-table th { color: #999; font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-
-.rank-badge { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-.rank-1 { background: #CE0E2D; color: white; }
-.rank-2 { background: rgba(206,14,45,0.7); color: white; }
-.rank-3 { background: rgba(206,14,45,0.4); color: white; }
-.rank-n { background: rgba(255,255,255,0.05); color: #999; }
-
 .sidebar {
-  position: fixed; left: 0; top: 0; bottom: 0; width: 200px; z-index: 40;
-  padding: 120px 0 40px;
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  background: rgba(13,13,13,0.85);
-  border-right: 1px solid rgba(255,255,255,0.04);
-  display: flex; flex-direction: column;
-  overflow-y: auto;
+  position: fixed; left: 0; top: 0; bottom: 0; width: 220px; z-index: 40;
+  padding: 140px 0 40px;
+  background: rgba(10,10,12,0.9);
+  border-right: 1px solid rgba(255,255,255,0.03);
+  display: flex; flex-direction: column; overflow-y: auto;
 }
 .sidebar-link {
   display: flex; align-items: center; gap: 10px;
-  padding: 10px 24px; font-size: 13px; color: #666; font-weight: 300;
-  transition: all 0.3s ease;
-  border-left: 2px solid transparent; letter-spacing: 0.05em;
+  padding: 9px 28px; font-size: 12.5px; color: #555; font-weight: 300;
+  transition: all 0.35s ease;
+  border-left: 2px solid transparent; letter-spacing: 0.04em;
   text-decoration: none;
 }
-.sidebar-link:hover { color: #ccc; background: rgba(255,255,255,0.02); }
+.sidebar-link:hover { color: #aaa; background: rgba(255,255,255,0.015); }
 .sidebar-link.active {
-  color: #fff; border-left-color: #CE0E2D;
-  background: rgba(206,14,45,0.06);
+  color: #D4A574; border-left-color: #D4A574;
+  background: rgba(212,165,116,0.04);
 }
 .sidebar-dot {
   width: 4px; height: 4px; min-width: 4px; border-radius: 50%;
-  background: currentColor; opacity: 0.3; transition: all 0.3s ease;
+  background: currentColor; opacity: 0.2; transition: all 0.35s ease;
 }
-.sidebar-link.active .sidebar-dot { opacity: 1; background: #CE0E2D; box-shadow: 0 0 8px rgba(206,14,45,0.5); }
-.sidebar-section {
-  padding-left: 24px; margin-top: 16px; margin-bottom: 4px;
-  font-size: 10px; letter-spacing: 0.15em; color: #444; font-weight: 400;
+.sidebar-link.active .sidebar-dot { opacity: 1; box-shadow: 0 0 10px rgba(212,165,116,0.4); }
+.sidebar-label {
+  padding: 0 28px; margin: 20px 0 6px;
+  font-size: 9px; letter-spacing: 0.2em; color: #333; font-weight: 500;
+  text-transform: uppercase;
 }
 @media (max-width: 1023px) { .sidebar { display: none; } }
 
-@media print {
-  body { background: white !important; color: #111 !important; }
-  .bg-hw-dark { background: white !important; }
-  .bg-hw-card { background: #FAFAFA !important; border: 1px solid #E5E5E5 !important; }
-  .text-white, .text-gray-300, .text-gray-400 { color: #111 !important; }
-  .text-gray-500, .text-gray-600 { color: #555 !important; }
+blockquote.insight {
+  border-left: 2px solid rgba(212,165,116,0.25);
+  padding: 20px 28px; margin: 28px 0;
+  background: rgba(212,165,116,0.015);
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; line-height: 1.8; color: #999;
+}
+
+.absence-card {
+  position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.absence-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.spectrum-bar {
+  height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, #D4A574, #C18D5A, #8B7355, #4A4A50, #2A2A30);
+}
+
+.metric-ring {
+  width: 80px; height: 80px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
 }
 </style>
 </head>
-<body class="bg-hw-dark text-gray-300">
+<body class="bg-[#0A0A0C] text-gray-300">
 
-<!-- ==================== 导航 ==================== -->
-<nav class="fixed top-0 w-full z-50 glass border-b border-white/[0.04]">
-  <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <span class="text-xs tracking-[0.2em] text-gray-500 font-light">HUAWEI</span>
-      <span class="w-[1px] h-3 bg-white/10"></span>
-      <span class="text-sm text-gray-400 font-light">竞品分析报告</span>
-    </div>
-    <div class="hidden md:flex gap-0 text-xs tracking-wider">
-      <a href="#method" class="px-4 py-2 text-gray-400 hover:text-white transition-colors font-light">方法</a>
-      <a href="#category" class="px-4 py-2 text-gray-400 hover:text-white transition-colors font-light">分类</a>
-      <a href="#visual" class="px-4 py-2 text-gray-400 hover:text-white transition-colors font-light">视觉</a>
-      <a href="#features" class="px-4 py-2 text-gray-400 hover:text-white transition-colors font-light">功能</a>
-      <a href="#deepdive" class="px-4 py-2 text-gray-400 hover:text-white transition-colors font-light">深挖</a>
-      <a href="#gap" class="px-4 py-2 text-gray-400 hover:text-white transition-colors font-light">差距</a>
-    </div>
-  </div>
-</nav>
-
-<!-- ==================== 左侧竖直导航 ==================== -->
+<!-- ==================== 左侧导航 ==================== -->
 <aside class="sidebar">
-  <div class="sidebar-section">报告章节</div>
-  <a href="#method" class="sidebar-link"><span class="sidebar-dot"></span>研究方法</a>
-  <a href="#category" class="sidebar-link"><span class="sidebar-dot"></span>主题分类</a>
-  <a href="#visual" class="sidebar-link"><span class="sidebar-dot"></span>视觉风格</a>
-  <a href="#features" class="sidebar-link"><span class="sidebar-dot"></span>功能矩阵</a>
-  <a href="#deepdive" class="sidebar-link"><span class="sidebar-dot"></span>代表深挖</a>
-  <a href="#gap" class="sidebar-link"><span class="sidebar-dot"></span>差距分析</a>
+  <div class="sidebar-label">分析框架</div>
+  <a href="#framing" class="sidebar-link"><span class="sidebar-dot"></span>视角转换</a>
+  <a href="#absences" class="sidebar-link"><span class="sidebar-dot"></span>六大缺失</a>
+  <a href="#spectrum" class="sidebar-link"><span class="sidebar-dot"></span>可用性光谱</a>
+  <a href="#categories" class="sidebar-link"><span class="sidebar-dot"></span>分类审视</a>
+  <a href="#body" class="sidebar-link"><span class="sidebar-dot"></span>身体隐喻能力</a>
+  <a href="#deepdive" class="sidebar-link"><span class="sidebar-dot"></span>代表主题深挖</a>
+  <a href="#opportunity" class="sidebar-link"><span class="sidebar-dot"></span>设计机会</a>
 </aside>
 
-<div class="lg:ml-[200px]">
+<div class="lg:ml-[220px]">
 
 <!-- ==================== Hero ==================== -->
-<header class="pt-40 pb-24 px-8 text-center" style="background: radial-gradient(ellipse 80% 60% at 50% 30%, #1A1015 0%, #0D0D0D 55%, #0A0A10 100%);">
-  <div class="inline-flex items-center gap-3 mb-8 animate-fade-in">
-    <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Competitive Analysis Report</span>
-    <span class="w-8 h-[1px] bg-white/10"></span>
-    <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light">Week 1 Deliverable</span>
+<header class="min-h-[90vh] flex items-center relative overflow-hidden px-8" style="background: radial-gradient(ellipse 70% 50% at 50% 35%, #141110 0%, #0A0A0C 55%, #060608 100%);">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute w-[400px] h-[400px] rounded-full animate-breathe" style="top:20%; left:60%; background: radial-gradient(circle, rgba(212,165,116,0.025) 0%, transparent 70%);"></div>
   </div>
-  <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight animate-slide-up" style="animation-delay:0.1s;">
-    HarmonyOS 主题商店<br><span class="hw-gradient-text">Top 50</span> 设计模式分析
-  </h1>
-  <p class="text-lg md:text-xl text-gray-500 font-light max-w-3xl mx-auto animate-slide-up leading-relaxed" style="animation-delay:0.2s;">
-    基于 2025–2026 年华为主题商店热门排行榜，对 Top 50 主题进行系统性设计模式分析<br>
-    分析维度涵盖视觉风格、交互模式、功能特性、商业模式
-  </p>
-  <div class="mt-12 grid grid-cols-4 gap-8 max-w-3xl mx-auto animate-fade-in" style="animation-delay:0.4s;">
-    <div class="text-center"><div class="text-3xl font-black hw-gradient-text mb-1">50</div><div class="text-[10px] text-gray-500 font-light tracking-wider">分析主题数</div></div>
-    <div class="text-center"><div class="text-3xl font-black text-white mb-1">8</div><div class="text-[10px] text-gray-500 font-light tracking-wider">主题分类</div></div>
-    <div class="text-center"><div class="text-3xl font-black text-white mb-1">12</div><div class="text-[10px] text-gray-500 font-light tracking-wider">功能维度</div></div>
-    <div class="text-center"><div class="text-3xl font-black text-white mb-1">10</div><div class="text-[10px] text-gray-500 font-light tracking-wider">深度拆解</div></div>
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="mb-8 animate-fade-in">
+      <span class="text-[10px] tracking-[0.3em] text-gray-600 font-light uppercase">Competitive Analysis · Reframed</span>
+      <span class="mx-3 text-gray-800">/</span>
+      <span class="text-[10px] tracking-[0.15em] text-gray-600 font-light">Week 1 Deliverable</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6 tracking-tight animate-fade-up" style="animation-delay:0.1s;">
+      不是更好的<span class="amber-gradient">皮肤</span>
+    </h1>
+    <p class="text-lg md:text-xl text-gray-500 font-light leading-relaxed max-w-xl mb-3 animate-fade-up" style="animation-delay:0.25s;">
+      HarmonyOS 主题商店 Top 50 分析——<br>从"系统角色"的视角重新提问
+    </p>
+    <p class="text-sm text-gray-600 font-light max-w-lg animate-fade-up" style="animation-delay:0.4s;">
+      不是分析它们做得好不好。而是追问：如果主题不是皮肤，而是系统里的室友——现有生态距离这个目标，还缺什么？
+    </p>
   </div>
 </header>
 
-<!-- ==================== 研究方法 ==================== -->
-<section id="method" class="py-32 px-8">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-1 h-8 rounded-full" style="background:#CE0E2D;"></div>
-        <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Methodology</span>
-      </div>
-      <h2 class="text-4xl font-black text-white tracking-tight mb-2">研究方法</h2>
-      <p class="text-gray-500 font-light">系统化的竞品分析框架</p>
+<!-- ==================== 视角转换 ==================== -->
+<section id="framing" class="py-36 px-8">
+  <div class="max-w-3xl mx-auto">
+    <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-8">Analytical Framing</span>
+
+    <p class="serif text-2xl md:text-3xl text-gray-400 font-medium leading-relaxed mb-12">
+      传统的竞品分析问"它们做得怎么样"。<br>本文问：<span class="text-white">"它们的角色，有自己的生活吗？"</span>
+    </p>
+
+    <div class="space-y-6 text-gray-500 font-light leading-relaxed">
+      <p>主流主题分析的框架围绕视觉质量、功能数量、用户满意度展开。这种分析把主题当作<strong class="text-gray-300 font-normal">静态产品</strong>来评估。</p>
+      <p>但如果我们接受一个前提——主题不只是皮肤，而是<strong class="text-white font-normal">操作系统中的角色</strong>——那么评估框架需要彻底改变。我们需要问的不是"它好不好看"，而是：</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl">
-        <h3 class="font-bold text-white text-lg mb-5 flex items-center gap-2"><i class="fa fa-database" style="color:#CE0E2D;"></i> 数据来源</h3>
-        <ul class="space-y-2.5 text-sm text-gray-400 font-light">
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 华为主题商店「热门」排行榜（2025.01–2026.04）</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 华为主题商店「编辑推荐」栏目</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 第三方社区（花粉俱乐部 / 酷安）用户评价</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 各主题预览图、描述文案、用户评分</li>
-        </ul>
+    <div class="grid md:grid-cols-2 gap-4 mt-8">
+      <div class="bg-[#0E0E12] border border-white/[0.02] p-5 rounded-xl">
+        <span class="text-[10px] tracking-wider text-gray-600">传统竞品分析问</span>
+        <p class="text-sm text-gray-500 font-light mt-2">配色是否和谐？图标是否统一？动效是否流畅？壁纸分辨率够吗？</p>
       </div>
-      <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl">
-        <h3 class="font-bold text-white text-lg mb-5 flex items-center gap-2"><i class="fa fa-bar-chart" style="color:#CE0E2D;"></i> 分析维度</h3>
-        <ul class="space-y-2.5 text-sm text-gray-400 font-light">
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white font-medium">分类分布</strong>：主题类型占比统计</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white font-medium">视觉风格</strong>：配色、图标、壁纸、字体规律</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white font-medium">功能矩阵</strong>：AOD/动态壁纸/小组件/音效等特性分布</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white font-medium">商业模式</strong>：定价策略、付费率分析</li>
-          <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white font-medium">用户偏好</strong>：评分分布、评论高频词</li>
-        </ul>
+      <div class="bg-[#0E0E12] border border-white/[0.02] p-5 rounded-xl">
+        <span class="text-[10px] tracking-wider text-gray-600" style="color:#D4A574;">本文问</span>
+        <p class="text-sm text-gray-500 font-light mt-2">角色有自己的生活节奏吗？它用身体表达系统状态吗？用户是控制者还是见证者？</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ==================== 分类统计 ==================== -->
-<section id="category" class="py-32 px-8" style="background: #0A0A0D;">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-1 h-8 rounded-full" style="background:#CE0E2D;"></div>
-        <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Category Analysis</span>
-      </div>
-      <h2 class="text-4xl font-black text-white tracking-tight mb-2">主题<strong class="hw-gradient-text">分类统计</strong></h2>
-      <p class="text-gray-500 font-light">Top 50 主题的 8 大类别分布</p>
-    </div>
+    <blockquote class="insight">
+      "分析框架决定了你能看见什么。如果框架里没有'角色'这个概念，你就永远只能看见皮肤。"
+    </blockquote>
 
-    <div class="grid md:grid-cols-2 gap-10">
-      <!-- 条形图 -->
-      <div class="space-y-5">
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">自然风光 / 风景</span><span class="text-gray-400">11 款 · 22%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:22%; background:linear-gradient(90deg, #4ADE80, #22C55E); max-width:22%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">极简 / 商务</span><span class="text-gray-400">9 款 · 18%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:18%; background:linear-gradient(90deg, #94A3B8, #64748B); max-width:18%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">卡通 / 萌宠</span><span class="text-gray-400">8 款 · 16%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:16%; background:linear-gradient(90deg, #FBBF24, #F59E0B); max-width:16%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">中国风 / 国潮</span><span class="text-gray-400">7 款 · 14%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:14%; background:linear-gradient(90deg, #F87171, #EF4444); max-width:14%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">抽象 / 艺术</span><span class="text-gray-400">6 款 · 12%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:12%; background:linear-gradient(90deg, #A78BFA, #8B5CF6); max-width:12%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">IP 联名 / 明星</span><span class="text-gray-400">4 款 · 8%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:8%; background:linear-gradient(90deg, #FB923C, #F97316); max-width:8%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">科技 / 未来</span><span class="text-gray-400">3 款 · 6%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:6%; background:linear-gradient(90deg, #38BDF8, #0EA5E9); max-width:6%;"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-white font-medium">节日 / 季节限定</span><span class="text-gray-400">2 款 · 4%</span></div>
-          <div class="h-3 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full animate-bar-grow" style="width:4%; background:linear-gradient(90deg, #F472B6, #EC4899); max-width:4%;"></div></div>
-        </div>
-      </div>
-
-      <!-- 关键发现 -->
-      <div class="space-y-5">
-        <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl">
-          <h3 class="font-bold text-white text-lg mb-4 flex items-center gap-2"><i class="fa fa-lightbulb-o" style="color:#FBBF24;"></i> 关键发现</h3>
-          <ul class="space-y-3 text-sm text-gray-400 font-light">
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white">自然风景类占比最高</strong>（22%），反映用户对「开阔感」「放松感」的强烈需求</li>
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white">极简商务类稳定第二</strong>（18%），华为商务用户基数大，偏好克制设计</li>
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white">卡通萌宠类第三</strong>（16%），与「萌主」方向直接相关——验证了市场空间</li>
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white">中国风占比显著</strong>（14%），在海外品牌中难以复制，是 HarmonyOS 的文化护城河</li>
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> <strong class="text-white">科技/未来类仅 6%</strong>，存在供给缺口——这正是「萌主」可占据的差异化定位</li>
-          </ul>
-        </div>
-
-        <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl">
-          <h3 class="font-bold text-white text-lg mb-4 flex items-center gap-2"><i class="fa fa-crosshairs" style="color:#CE0E2D;"></i> 对我们的启示</h3>
-          <ul class="space-y-2.5 text-sm text-gray-400 font-light">
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 萌主可同时覆盖<span class="text-white">卡通萌宠 + 科技未来</span>两个类别，填补交叉空白</li>
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 16% 的萌宠市场尚无「智能互动型」主题，全部为静态/循环动画</li>
-            <li class="flex gap-2"><span class="text-gray-600 shrink-0">·</span> 中国风用户与萌宠用户重叠度低，萌主初期可不主打中国风</li>
-          </ul>
-        </div>
+    <div class="mt-12 bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-8">
+      <h3 class="font-bold text-white text-sm mb-6">六个分析维度（重构后）</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="flex gap-3"><span class="text-gray-600 text-xs">01</span><div><span class="text-white text-xs font-medium">可用性模型</span><p class="text-[11px] text-gray-600 mt-1">永远在线 vs 有节奏</p></div></div>
+        <div class="flex gap-3"><span class="text-gray-600 text-xs">02</span><div><span class="text-white text-xs font-medium">系统状态表达</span><p class="text-[11px] text-gray-600 mt-1">数据面板 vs 身体隐喻</p></div></div>
+        <div class="flex gap-3"><span class="text-gray-600 text-xs">03</span><div><span class="text-white text-xs font-medium">时间性存在</span><p class="text-[11px] text-gray-600 mt-1">静态循环 vs 有自己的一天</p></div></div>
+        <div class="flex gap-3"><span class="text-gray-600 text-xs">04</span><div><span class="text-white text-xs font-medium">关系模型</span><p class="text-[11px] text-gray-600 mt-1">工具使用 vs 共同生活</p></div></div>
+        <div class="flex gap-3"><span class="text-gray-600 text-xs">05</span><div><span class="text-white text-xs font-medium">用户能动性</span><p class="text-[11px] text-gray-600 mt-1">完全控制 vs 见证</p></div></div>
+        <div class="flex gap-3"><span class="text-gray-600 text-xs">06</span><div><span class="text-white text-xs font-medium">跨表面存在</span><p class="text-[11px] text-gray-600 mt-1">单屏壁纸 vs 贯穿桌面/锁屏/专注模式</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 视觉风格分析 ==================== -->
-<section id="visual" class="py-32 px-8">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-1 h-8 rounded-full" style="background:#CE0E2D;"></div>
-        <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Visual Style Analysis</span>
-      </div>
-      <h2 class="text-4xl font-black text-white tracking-tight mb-2"><strong class="hw-gradient-text">视觉风格</strong>深度拆解</h2>
-      <p class="text-gray-500 font-light">从配色、图标、壁纸、字体四个维度分析设计规律</p>
+<!-- ==================== 六大缺失 ==================== -->
+<section id="absences" class="py-36 px-8" style="background: #08080A;">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-20">
+      <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-6">Universal Absences</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">六大<span class="amber-gradient">系统性缺失</span></h2>
+      <p class="text-gray-500 font-light max-w-xl">在 Top 50 主题中，这六个维度上没有任何主题得分 > 0%。不是做得不好——是根本没有做。</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <!-- 配色 -->
-      <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl">
-        <h3 class="font-bold text-white text-lg mb-5 flex items-center gap-2"><i class="fa fa-eyedropper" style="color:#8B5CF6;"></i> 配色规律</h3>
-        <div class="space-y-4 text-sm">
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex gap-1.5">
-                <div class="w-6 h-6 rounded" style="background:#1A1A2E;"></div><div class="w-6 h-6 rounded" style="background:#16213E;"></div><div class="w-6 h-6 rounded" style="background:#0F3460;"></div>
-              </div>
-              <span class="text-white font-medium">深色系</span><span class="text-gray-500 text-xs">38% 主题采用</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">深蓝、纯黑、深灰为主色调，适配 OLED 屏幕省电特性，暗色模式下的天然优势</p>
-          </div>
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex gap-1.5">
-                <div class="w-6 h-6 rounded" style="background:#FAFAFA; border:1px solid #E5E5E5;"></div><div class="w-6 h-6 rounded" style="background:#F5F5F5; border:1px solid #E5E5E5;"></div><div class="w-6 h-6 rounded" style="background:#E8E8E8; border:1px solid #E5E5E5;"></div>
-              </div>
-              <span class="text-white font-medium">浅色/白色系</span><span class="text-gray-500 text-xs">28% 主题采用</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">极简商务类首选，高对比度、干净利落，但缺乏层次感</p>
-          </div>
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex gap-1.5">
-                <div class="w-6 h-6 rounded" style="background:linear-gradient(135deg, #F97316, #EF4444);"></div><div class="w-6 h-6 rounded" style="background:linear-gradient(135deg, #8B5CF6, #EC4899);"></div><div class="w-6 h-6 rounded" style="background:linear-gradient(135deg, #06B6D4, #3B82F6);"></div>
-              </div>
-              <span class="text-white font-medium">高饱和渐变</span><span class="text-gray-500 text-xs">22% 主题采用</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">卡通/IP/艺术类使用，视觉冲击力强，但长时间使用易疲劳</p>
-          </div>
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex gap-1.5">
-                <div class="w-6 h-6 rounded" style="background:#D4A853;"></div><div class="w-6 h-6 rounded" style="background:#C41E3A;"></div><div class="w-6 h-6 rounded" style="background:#1A1A1A;"></div>
-              </div>
-              <span class="text-white font-medium">金/红/黑传统色</span><span class="text-gray-500 text-xs">12% 主题采用</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">几乎全部来自中国风/国潮主题，配色高度同质化：金边+红底+黑字</p>
-          </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Absence 1 -->
+      <div class="absence-card bg-[#0E0E12] border border-white/[0.02] p-7 rounded-2xl">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,116,0.06);">
+          <i class="fa fa-clock-o text-lg" style="color:#D4A574;"></i>
         </div>
-      </div>
-
-      <!-- 图标风格 -->
-      <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl">
-        <h3 class="font-bold text-white text-lg mb-5 flex items-center gap-2"><i class="fa fa-th-large" style="color:#3B82F6;"></i> 图标设计规律</h3>
-        <div class="space-y-4 text-sm">
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-white font-medium">圆角方形 (Squircle)</span>
-              <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(59,130,246,0.15); color:#3B82F6;">44%</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">最主流的图标造型，与 iOS/One UI 趋同，符合「安全且熟悉」的用户期望</p>
-          </div>
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-white font-medium">正圆形</span>
-              <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(139,92,246,0.15); color:#8B5CF6;">24%</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">HarmonyOS 原生风格的延续，部分主题将其与多彩渐变结合</p>
-          </div>
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-white font-medium">异形 / 不规则</span>
-              <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(245,158,11,0.15); color:#F59E0B;">18%</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">卡通/IP 主题使用，与角色形象统一（如猫爪形、云朵形），差异化强但兼容性差</p>
-          </div>
-          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,0.01);">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-white font-medium">无背景 / 线框</span>
-              <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(148,163,184,0.15); color:#94A3B8;">14%</span>
-            </div>
-            <p class="text-gray-500 font-light text-xs">极简商务类使用，去底透明图标 + 单色线框，高级感强但辨识度降低</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 壁纸与字体 -->
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl">
-        <h3 class="font-bold text-white text-lg mb-5 flex items-center gap-2"><i class="fa fa-picture-o" style="color:#22C55E;"></i> 壁纸类型分布</h3>
-        <div class="space-y-3 text-sm">
-          <div class="flex justify-between"><span class="text-gray-400">静态摄影照片</span><span class="text-white font-medium">36%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:36%; background:#22C55E;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">数字插画 / 3D 渲染</span><span class="text-white font-medium">28%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:28%; background:#3B82F6;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">纯色 / 渐变抽象</span><span class="text-white font-medium">20%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:20%; background:#8B5CF6;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">动态视频壁纸</span><span class="text-white font-medium">10%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:10%; background:#F59E0B;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">实时渲染壁纸</span><span class="text-white font-medium">6%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:6%; background:#CE0E2D;"></div></div>
-        </div>
-        <p class="text-xs text-gray-500 font-light mt-4 p-3 rounded-lg" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white">关键发现：</span>仅 6% 使用实时渲染壁纸，且全部为基础粒子/波浪效果。没有任何主题使用传感器驱动的实时 Shader 材质变化——这是萌主的核心技术差异化。
+        <h3 class="font-bold text-white text-base mb-3">缺失 1：零环境感知</h3>
+        <div class="text-3xl font-black mb-3" style="color:rgba(212,165,116,0.6);">0/50</div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          没有任何主题感知光线、天气、时段。所有主题都是<strong class="text-gray-400 font-normal">"盲的"</strong>——角色不知道外面是天亮还是天黑，因为根本没有角色。
         </p>
+        <div class="mt-4 pt-3 border-t border-white/[0.02]">
+          <span class="text-[10px] text-gray-600">室友视角：它不知道现在是什么时间——它怎么可能有自己的生活节奏？</span>
+        </div>
       </div>
 
-      <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl">
-        <h3 class="font-bold text-white text-lg mb-5 flex items-center gap-2"><i class="fa fa-font" style="color:#F59E0B;"></i> 字体使用规律</h3>
-        <div class="space-y-3 text-sm">
-          <div class="flex justify-between"><span class="text-gray-400">系统默认字体（不替换）</span><span class="text-white font-medium">42%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:42%; background:#94A3B8;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">黑体系列</span><span class="text-white font-medium">28%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:28%; background:#64748B;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">圆体 / 可爱体</span><span class="text-white font-medium">16%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:16%; background:#F59E0B;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">书法 / 手写体</span><span class="text-white font-medium">10%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:10%; background:#EF4444;"></div></div>
-          <div class="flex justify-between"><span class="text-gray-400">品牌定制字体</span><span class="text-white font-medium">4%</span></div>
-          <div class="h-2 rounded-full" style="background:#1A1A1E;"><div class="h-full rounded-full" style="width:4%; background:#8B5CF6;"></div></div>
+      <!-- Absence 2 -->
+      <div class="absence-card bg-[#0E0E12] border border-white/[0.02] p-7 rounded-2xl">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,116,0.06);">
+          <i class="fa fa-puzzle-piece text-lg" style="color:#D4A574;"></i>
         </div>
-        <p class="text-xs text-gray-500 font-light mt-4 p-3 rounded-lg" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white">关键发现：</span>仅 4% 有品牌定制字体。萌主的字体可以随场景/人格参数微调（如活跃度高 → 字体更圆更有弹性），这是差异化点。
+        <h3 class="font-bold text-white text-base mb-3">缺失 2：零系统功能耦合</h3>
+        <div class="text-3xl font-black mb-3" style="color:rgba(212,165,116,0.6);">0/50</div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          主题与系统功能<strong class="text-gray-400 font-normal">完全隔离</strong>。文件下载、通知堆积、设备流转——这些系统事件没有任何视觉表达。主题是皮肤，不是身体。
         </p>
+        <div class="mt-4 pt-3 border-t border-white/[0.02]">
+          <span class="text-[10px] text-gray-600">室友视角：通知满了——但室友的口袋没有鼓起来。它看不见系统正在发生什么。</span>
+        </div>
+      </div>
+
+      <!-- Absence 3 -->
+      <div class="absence-card bg-[#0E0E12] border border-white/[0.02] p-7 rounded-2xl">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,116,0.06);">
+          <i class="fa fa-line-chart text-lg" style="color:#D4A574;"></i>
+        </div>
+        <h3 class="font-bold text-white text-base mb-3">缺失 3：零长期演化</h3>
+        <div class="text-3xl font-black mb-3" style="color:rgba(212,165,116,0.6);">0/50</div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          今天是这个主题，明天也是。一个月后<strong class="text-gray-400 font-normal">一模一样</strong>。没有任何主题会因为时间推移而变化——它们没有记忆、没有年龄、没有经历。
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/[0.02]">
+          <span class="text-[10px] text-gray-600">室友视角：你认识它三个月了，它还是第一次见你的样子。这不是关系，这是壁纸。</span>
+        </div>
+      </div>
+
+      <!-- Absence 4 -->
+      <div class="absence-card bg-[#0E0E12] border border-white/[0.02] p-7 rounded-2xl">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,116,0.06);">
+          <i class="fa fa-film text-lg" style="color:#D4A574;"></i>
+        </div>
+        <h3 class="font-bold text-white text-base mb-3">缺失 4：零内容感知</h3>
+        <div class="text-3xl font-black mb-3" style="color:rgba(212,165,116,0.6);">0/50</div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          用户在听歌、看视频、玩游戏——主题<strong class="text-gray-400 font-normal">完全不知道</strong>。没有任何主题对内容做出反应。皮肤没有耳朵，也没有情绪。
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/[0.02]">
+          <span class="text-[10px] text-gray-600">室友视角：你哭了一晚上，室友毫无反应。它不是冷漠，它只是根本不知道。</span>
+        </div>
+      </div>
+
+      <!-- Absence 5 -->
+      <div class="absence-card bg-[#0E0E12] border border-white/[0.02] p-7 rounded-2xl">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,116,0.06);">
+          <i class="fa fa-tablet text-lg" style="color:#D4A574;"></i>
+        </div>
+        <h3 class="font-bold text-white text-base mb-3">缺失 5：零多设备仪式感</h3>
+        <div class="text-3xl font-black mb-3" style="color:rgba(212,165,116,0.6);">0/50</div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          手机换平板——主题是<strong class="text-gray-400 font-normal">两个独立的副本</strong>。没有任何主题体现设备流转的连续性。角色不能"走过屏幕"。
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/[0.02]">
+          <span class="text-[10px] text-gray-600">室友视角：你从客厅走到卧室，室友还在原地——复制了一个一模一样的，但不是同一个。</span>
+        </div>
+      </div>
+
+      <!-- Absence 6 -->
+      <div class="absence-card bg-[#0E0E12] border border-white/[0.02] p-7 rounded-2xl">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,116,0.06);">
+          <i class="fa fa-bolt text-lg" style="color:#D4A574;"></i>
+        </div>
+        <h3 class="font-bold text-white text-base mb-3">缺失 6：弱实时渲染</h3>
+        <div class="text-3xl font-black mb-3" style="color:rgba(212,165,116,0.6);">3/50</div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          仅 6%（3 款）有实时渲染元素，且全部为基础粒子/波浪。无 Shader 材质、无顶点动画、<strong class="text-gray-400 font-normal">无身体</strong>。
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/[0.02]">
+          <span class="text-[10px] text-gray-600">室友视角：室友没有身体——它只是一个会动的图片。你怎么跟图片建立关系？</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 功能矩阵 ==================== -->
-<section id="features" class="py-32 px-8" style="background: #0A0A0D;">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-1 h-8 rounded-full" style="background:#CE0E2D;"></div>
-        <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Feature Matrix</span>
-      </div>
-      <h2 class="text-4xl font-black text-white tracking-tight mb-2"><strong class="hw-gradient-text">功能特性</strong>矩阵</h2>
-      <p class="text-gray-500 font-light">Top 50 主题覆盖的 12 项功能维度及渗透率</p>
+<!-- ==================== 可用性光谱 ==================== -->
+<section id="spectrum" class="py-36 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-20">
+      <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-6">Availability Spectrum</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">可用性<span class="amber-gradient">光谱</span></h2>
+      <p class="text-gray-500 font-light max-w-xl">将所有 50 款主题映射到"可用性"轴上——从完全被动到具备自主节奏。我们发现整个行业集中在最左侧。</p>
     </div>
 
-    <div class="overflow-x-auto bg-hw-card border border-white/[0.04] rounded-2xl mb-8">
-      <table class="w-full hw-table">
+    <!-- Spectrum visualization -->
+    <div class="mb-16">
+      <div class="flex justify-between text-[10px] tracking-wider text-gray-600 mb-3">
+        <span>完全被动<br>（工具）</span>
+        <span>有状态<br>但不自主</span>
+        <span>有节奏<br>有边界</span>
+        <span>独立生活<br>（室友）</span>
+      </div>
+      <div class="spectrum-bar w-full mb-8"></div>
+      <div class="flex justify-between text-[10px] tracking-wider">
+        <span class="text-gray-600">50 款主题全部在此<br><span class="text-white">100%</span></span>
+        <span class="text-gray-600">无主题在此<br><span class="text-white">0%</span></span>
+        <span class="text-gray-600">无主题在此<br><span class="text-white">0%</span></span>
+        <span class="text-gray-600" style="color:#D4A574;">设计目标<br><span style="color:#D4A574;">萌主</span></span>
+      </div>
+    </div>
+
+    <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-8">
+      <h3 class="font-bold text-white text-sm mb-4">光谱解读</h3>
+      <div class="space-y-4 text-sm text-gray-500 font-light leading-relaxed">
+        <p>Top 50 主题<strong class="text-gray-300 font-normal">全部</strong>位于频谱最左端——它们是<strong class="text-gray-300 font-normal">完全被动的视觉资产</strong>。用户选择、应用、更换——主题不做任何事，它只是存在。</p>
+        <p>没有任何主题具备"状态"的概念——它不知道系统在干什么，不知道现在是什么时间，不知道这是用户第几次使用它。<strong class="text-white font-normal">它没有记忆，没有节奏，没有身体。</strong></p>
+        <p>频谱右侧——"独立生活"——目前<strong class="text-gray-300 font-normal">完全空白</strong>。这恰好是萌主的独占空间：一个拥有自己节奏、会累会忙、不完全受控的系统级角色。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 分类审视 ==================== -->
+<section id="categories" class="py-36 px-8" style="background: #08080A;">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-20">
+      <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-6">Category Re-examination</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">八类主题<span class="amber-gradient">室友视角</span>审视</h2>
+      <p class="text-gray-500 font-light max-w-xl">不是评估美学质量，而是追问每类主题距离"系统角色"有多远。</p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- 自然风光 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">22% · 11 款</span>
+          <h4 class="font-bold text-white mt-1">自然风光</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>风景摄影 + 柔和配色，用户偏好稳定。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>它们是漂亮的<span class="text-gray-300">窗景</span>——但窗外永远没有活物。没有角色，无从谈关系。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：无限远</span>
+        </div>
+      </div>
+
+      <!-- 极简商务 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">18% · 9 款</span>
+          <h4 class="font-bold text-white mt-1">极简商务</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>几何图形 + 克制配色，效率感强。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>完全<strong class="text-gray-300">没有活体痕迹</strong>——极简到连暗示都不留。是最不"室友"的类别。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：无限远</span>
+        </div>
+      </div>
+
+      <!-- 卡通萌宠 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">16% · 8 款</span>
+          <h4 class="font-bold text-white mt-1">卡通萌宠</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>可爱角色壁纸，吸引年轻女性用户。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>有角色形象，但<strong class="text-gray-300">完全无行为</strong>——它们是摆拍的照片，不是活着的室友。有身体但没生命，比无角色更令人沮丧。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：外观最近 / 行为最远</span>
+        </div>
+      </div>
+
+      <!-- 中国风 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">14% · 7 款</span>
+          <h4 class="font-bold text-white mt-1">中国风</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>水墨、书法、传统纹样，文化辨识度高。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>充满<strong class="text-gray-300">"物的叙事"</strong>但无"人的存在"——你可以感受到时间（古老的时间），但感受不到当下正在流逝的时间。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：远</span>
+        </div>
+      </div>
+
+      <!-- 抽象艺术 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">12% · 6 款</span>
+          <h4 class="font-bold text-white mt-1">抽象艺术</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>色彩构成 + 几何实验，审美好但受众窄。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>有"表情"的可能——色彩与形态的变化可以<strong class="text-gray-300">隐喻情感</strong>。但它们拒绝具象，也就拒绝成为"谁"。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：中等</span>
+        </div>
+      </div>
+
+      <!-- IP联名 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">8% · 4 款</span>
+          <h4 class="font-bold text-white mt-1">IP 联名</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>知名 IP 角色，粉丝效应强。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>角色存在，但<strong class="text-gray-300">它是"别人的"角色</strong>——用户是粉丝，不是室友。IP 角色的行为和性格已被原作锁定，它在手机里无法"生活"。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：有名无实</span>
+        </div>
+      </div>
+
+      <!-- 科技未来 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">6% · 3 款</span>
+          <h4 class="font-bold text-white mt-1">科技未来</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>粒子、光效、HUD 元素，偏男性用户。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>这 3 款是<strong class="text-gray-300">唯一有实时渲染的</strong>——但渲染的是"系统"而非"角色"。它们是机器的身体，不是室友的身体。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：近（技术上）/ 远（情感上）</span>
+        </div>
+      </div>
+
+      <!-- 节日限定 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="md:w-48 shrink-0">
+          <span class="text-[10px] tracking-wider text-gray-600">4% · 2 款</span>
+          <h4 class="font-bold text-white mt-1">节日限定</h4>
+        </div>
+        <div class="flex-1 text-sm text-gray-500 font-light">
+          <span class="text-gray-600">传统视角：</span>季节性主题，时效性强。<br>
+          <span class="text-gray-600" style="color:#D4A574;">室友视角：</span>最有<strong class="text-gray-300">时间感</strong>的类别——但时间是"节日"的，不是"今天"的。没有角色在里面过节，只是一张节日贺卡。
+        </div>
+        <div class="md:w-32 text-right">
+          <span class="text-[10px] tracking-wider" style="color:#D4A574;">角色距离：远</span>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="insight mt-12">
+      "卡通萌宠离室友最近——它有形象。但也是最令人失望的——它有身体，却没有生命。一个不会动的室友，比没有室友更孤独。"
+    </blockquote>
+  </div>
+</section>
+
+<!-- ==================== 身体隐喻能力 ==================== -->
+<section id="body" class="py-36 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-20">
+      <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-6">Embodied Metaphor Assessment</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">身体隐喻<span class="amber-gradient">能力评估</span></h2>
+      <p class="text-gray-500 font-light max-w-xl">系统状态可以通过角色的身体来表达——口袋变鼓 = 通知多，打瞌睡 = 深夜。现有主题在这方面的能力如何？</p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
         <thead>
-          <tr>
-            <th>功能维度</th>
-            <th>渗透率</th>
-            <th>典型实现方式</th>
-            <th>用户感知价值</th>
-            <th>与萌主的关系</th>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
+            <th class="text-left p-4 text-[10px] tracking-wider text-gray-600 font-medium">身体隐喻能力</th>
+            <th class="text-center p-4 text-[10px] tracking-wider text-gray-600 font-medium">自然风光</th>
+            <th class="text-center p-4 text-[10px] tracking-wider text-gray-600 font-medium">极简商务</th>
+            <th class="text-center p-4 text-[10px] tracking-wider text-gray-600 font-medium">卡通萌宠</th>
+            <th class="text-center p-4 text-[10px] tracking-wider text-gray-600 font-medium">抽象艺术</th>
+            <th class="text-center p-4 text-[10px] tracking-wider text-gray-600 font-medium">科技未来</th>
+            <th class="text-center p-4 text-[10px] tracking-wider text-gray-600 font-medium">IP联名</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="text-white font-medium">自定义图标包</td>
-            <td><span class="font-bold" style="color:#22C55E;">100%</span></td>
-            <td class="text-gray-400 font-light">覆盖系统图标 + 主流三方应用</td>
-            <td class="text-gray-400 font-light">★★★★★ 刚需</td>
-            <td class="text-gray-400 font-light text-xs">萌主基础功能，可加入场景感知图标微动效</td>
+        <tbody class="font-light">
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.02);">
+            <td class="p-4 text-white text-xs">有可变形体</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-xs" style="color:#D4A574;">✓</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-xs" style="color:#D4A574;">部分</td>
+            <td class="text-center p-4 text-xs" style="color:#D4A574;">✓</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.02);">
+            <td class="p-4 text-white text-xs">有表情/姿态系统</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.02);">
+            <td class="p-4 text-white text-xs">表达系统状态</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.02);">
+            <td class="p-4 text-white text-xs">有时间性变化</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
           </tr>
           <tr>
-            <td class="text-white font-medium">锁屏壁纸</td>
-            <td><span class="font-bold" style="color:#22C55E;">100%</span></td>
-            <td class="text-gray-400 font-light">静态图 / 视频 / 杂志锁屏轮播</td>
-            <td class="text-gray-400 font-light">★★★★★ 刚需</td>
-            <td class="text-gray-400 font-light text-xs">萌主在锁屏的「主舞台」——环境材质 + 通知口袋</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">桌面壁纸</td>
-            <td><span class="font-bold" style="color:#22C55E;">100%</span></td>
-            <td class="text-gray-400 font-light">与锁屏联动或独立设置</td>
-            <td class="text-gray-400 font-light">★★★★★ 刚需</td>
-            <td class="text-gray-400 font-light text-xs">萌主在桌面的「散步模式」——轻量存在不打扰</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">AOD 息屏显示</td>
-            <td><span class="font-bold" style="color:#F59E0B;">58%</span></td>
-            <td class="text-gray-400 font-light">静态图案 / 简单动画 / 数字时钟</td>
-            <td class="text-gray-400 font-light">★★★☆☆</td>
-            <td class="text-gray-400 font-light text-xs">萌主睡眠态——呼吸光效 + 闭眼动画，低功耗</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">动态壁纸</td>
-            <td><span class="font-bold" style="color:#F59E0B;">32%</span></td>
-            <td class="text-gray-400 font-light">视频循环播放 / 简单粒子效果</td>
-            <td class="text-gray-400 font-light">★★★★☆</td>
-            <td class="text-gray-400 font-light text-xs"><strong class="text-white">萌主核心优势</strong>——实时 Shader 驱动远超视频循环</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">音效主题</td>
-            <td><span class="font-bold" style="color:#F59E0B;">28%</span></td>
-            <td class="text-gray-400 font-light">替换系统提示音 / 锁屏音 / 充电音</td>
-            <td class="text-gray-400 font-light">★★☆☆☆</td>
-            <td class="text-gray-400 font-light text-xs">萌主可加入环境感知音效（随天气/时段变化）</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">小组件皮肤</td>
-            <td><span class="font-bold" style="color:#F59E0B;">24%</span></td>
-            <td class="text-gray-400 font-light">天气/时钟/日历组件的主题化皮肤</td>
-            <td class="text-gray-400 font-light">★★★☆☆</td>
-            <td class="text-gray-400 font-light text-xs">萌主可「住进」小组件，在不同组件间游走</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">杂志锁屏</td>
-            <td><span class="font-bold" style="color:#F59E0B;">20%</span></td>
-            <td class="text-gray-400 font-light">锁屏轮播高质量图片</td>
-            <td class="text-gray-400 font-light">★★★★☆</td>
-            <td class="text-gray-400 font-light text-xs">萌主可替代杂志——它本身就是「活的内容」</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">充电动画</td>
-            <td><span class="font-bold" style="color:#F59E0B;">18%</span></td>
-            <td class="text-gray-400 font-light">自定义充电动效 / 进度条</td>
-            <td class="text-gray-400 font-light">★★★☆☆</td>
-            <td class="text-gray-400 font-light text-xs">萌主微交互之一——小板凳坐充电口旁</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">主题色适配</td>
-            <td><span class="font-bold" style="color:#F59E0B;">14%</span></td>
-            <td class="text-gray-400 font-light">Material You 风格取色</td>
-            <td class="text-gray-400 font-light">★★★☆☆</td>
-            <td class="text-gray-400 font-light text-xs">萌主材质由环境驱动，比取壁纸色更本质</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">多设备同步</td>
-            <td><span class="font-bold" style="color:#EF4444;">6%</span></td>
-            <td class="text-gray-400 font-light">同一主题在不同设备上显示</td>
-            <td class="text-gray-400 font-light">★★☆☆☆</td>
-            <td class="text-gray-400 font-light text-xs"><strong class="text-white">萌主核心优势</strong>——设备流转时跑过去的动画</td>
-          </tr>
-          <tr>
-            <td class="text-white font-medium">场景自适应</td>
-            <td><span class="font-bold" style="color:#CE0E2D;">0%</span></td>
-            <td class="text-gray-400 font-light">无任何主题实现</td>
-            <td class="text-gray-400 font-light">—</td>
-            <td class="text-gray-400 font-light text-xs"><strong class="text-white">萌主独占</strong>——环境/时段/内容/声音四维感知</td>
+            <td class="p-4 text-white text-xs">有不可用状态</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
+            <td class="text-center p-4 text-gray-600 text-xs">—</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl" style="border-color: rgba(206,14,45,0.15); background: rgba(206,14,45,0.03);">
-      <p class="text-sm text-gray-300 font-light">
-        <i class="fa fa-exclamation-triangle" style="color:#CE0E2D;"></i>
-        <strong class="text-white">核心洞察：</strong>
-        功能矩阵的最后一行——<strong class="text-white">场景自适应渗透率为 0%</strong>。Top 50 中没有任何主题能根据环境变化行为。所有动态壁纸都是「播放」，不是「响应」。萌主的 12 维材质参数 + 传感器驱动是 <strong class="text-white">彻底的功能空白填补</strong>。
+    <div class="mt-8 bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-8">
+      <p class="text-sm text-gray-500 font-light leading-relaxed">
+        <strong class="text-white font-medium">关键发现：</strong>卡通萌宠和 IP 联名有"身体"（角色形象），但<strong class="text-gray-300 font-normal">没有一项能力超过"有身体"这个层面</strong>。它们不会累、不会忙、不会因为通知多了而口袋鼓起。有身体而无行为——这是最接近室友的类别，也恰恰是最暴露差距的类别。
       </p>
     </div>
   </div>
 </section>
 
 <!-- ==================== 代表主题深挖 ==================== -->
-<section id="deepdive" class="py-32 px-8">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-1 h-8 rounded-full" style="background:#CE0E2D;"></div>
-        <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Deep Dive</span>
-      </div>
-      <h2 class="text-4xl font-black text-white tracking-tight mb-2">代表主题<strong class="hw-gradient-text">深度拆解</strong></h2>
-      <p class="text-gray-500 font-light">从 8 个分类中各选 1–2 款标杆主题进行设计模式提取</p>
+<section id="deepdive" class="py-36 px-8" style="background: #08080A;">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-20">
+      <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-6">Deep Dive</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">8 款代表主题<span class="amber-gradient">深度审视</span></h2>
+      <p class="text-gray-500 font-light max-w-xl">不是排名，而是追问每款主题的"角色可能性"——如果朝室友方向推进一步，它缺什么？</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-5">
-      <!-- 1. 自然风光 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-1">#1</div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Theme 1 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold text-white" style="background:#D4A574;">1</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(34,197,94,0.12); color:#22C55E;">自然风光</span>
-              <span class="text-[10px] text-gray-500">¥6–12</span>
-              <span class="text-[10px] text-gray-500">★ 4.7</span>
-            </div>
-            <h4 class="font-bold text-white">「极光幻境」类风景主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>高清摄影 + 色调统一滤镜 + 极简图标蒙层。壁纸是唯一主角，图标/小组件退为「标注层」。锁屏与桌面壁纸通常为同一场景的不同景别。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 视觉震撼</span><span class="text-gray-500">✅ 适配暗色模式</span><span class="text-gray-600">✗ 无交互</span><span class="text-gray-600">✗ 静态</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">星河入梦</h4>
+            <span class="text-[10px] text-gray-600">科技未来 · 实时粒子渲染</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          Top 50 中实时渲染最成熟的一款。粒子随触控飘散，星空缓慢旋转。技术上最接近"活体"——但粒子没有身体，星空不会累。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>给星空一个身体——当用户深夜打开时，星系转得慢一些、暗一些。不是关掉，是<strong class="text-gray-400 font-normal">它困了</strong>。
         </div>
       </div>
 
-      <!-- 2. 极简商务 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-2">#2</div>
+      <!-- Theme 2 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold text-white" style="background:rgba(212,165,116,0.65);">2</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(148,163,184,0.12); color:#94A3B8;">极简商务</span>
-              <span class="text-[10px] text-gray-500">¥3–9</span>
-              <span class="text-[10px] text-gray-500">★ 4.6</span>
-            </div>
-            <h4 class="font-bold text-white">「黑曜」类商务主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>纯黑/深灰底 + 单色线框图标 + 无衬线字体。最大特点是「消失感」——主题不表达自己，让内容成为主角。AOD 通常只保留极简数字时钟。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 省电</span><span class="text-gray-500">✅ 专注感</span><span class="text-gray-500">✅ 不干扰</span><span class="text-gray-600">✗ 无个性</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">可爱日常</h4>
+            <span class="text-[10px] text-gray-600">卡通萌宠 · 静态角色壁纸</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          极其精致的卡通角色，多套服装切换。但角色只是"换衣服"——不是在生活。你切换主题时它换装，你不切换时它是死的。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>它不需要用户手动换衣服。早晨自己换好出门装，晚上自己换上睡衣——<strong class="text-gray-400 font-normal">它有自己的节奏</strong>。
         </div>
       </div>
 
-      <!-- 3. 卡通萌宠 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-3">#3</div>
+      <!-- Theme 3 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold text-white" style="background:rgba(212,165,116,0.35);">3</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(245,158,11,0.12); color:#F59E0B;">卡通萌宠</span>
-              <span class="text-[10px] text-gray-500">¥6–18</span>
-              <span class="text-[10px] text-gray-500">★ 4.5</span>
-            </div>
-            <h4 class="font-bold text-white">「萌趣日常」类卡通主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>单一角色 IP 贯穿全界面——锁屏=角色在场景中，桌面=角色变小蹲在角落，图标=角色变体。部分主题有 2-3 帧循环动画（眨眼/呼吸），但<strong class="text-white">无任何环境响应</strong>。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 情感连接</span><span class="text-gray-500">✅ 辨识度高</span><span class="text-gray-600">✗ 动画简单</span><span class="text-gray-600">✗ 无交互</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">墨韵</h4>
+            <span class="text-[10px] text-gray-600">中国风 · 水墨动态壁纸</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          水墨渲染随滑动晕开，有"动作-反应"的交互感。但没有主动行为——它只在你碰它时才会动。你离开，它就静止。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>水墨不必等用户触碰。它可以自己呼吸——浓淡随时间变化，<strong class="text-gray-400 font-normal">午后最淡，午夜最浓</strong>。
         </div>
       </div>
 
-      <!-- 4. 中国风 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-n">#4</div>
+      <!-- Theme 4 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold" style="background:rgba(255,255,255,0.05); color:#999;">4</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(239,68,68,0.12); color:#EF4444;">中国风</span>
-              <span class="text-[10px] text-gray-500">¥6–12</span>
-              <span class="text-[10px] text-gray-500">★ 4.5</span>
-            </div>
-            <h4 class="font-bold text-white">「山水墨韵」类国风主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>水墨/工笔/敦煌三种主流风格。金红配色占绝对主导。图标模仿印章/窗棂/扇面造型。锁屏常配竖排诗词。同质化严重——金边红底黑字几乎是标准答案。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 文化自信</span><span class="text-gray-500">✅ 辨识度</span><span class="text-gray-600">✗ 同质化</span><span class="text-gray-600">✗ 男性偏向</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">极黑</h4>
+            <span class="text-[10px] text-gray-600">极简商务 · 纯黑 + 细线图标</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          极致克制。没有任何多余元素——也没有任何"活"的痕迹。是最高效的视觉资产，也是最无情的室友候选人。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>极简不是敌人——但极简也可以有生命。一抹几乎看不见的暖色在深夜微微变暗，<strong class="text-gray-400 font-normal">连克制都可以有呼吸</strong>。
         </div>
       </div>
 
-      <!-- 5. 抽象艺术 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-n">#5</div>
+      <!-- Theme 5 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold" style="background:rgba(255,255,255,0.05); color:#999;">5</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(139,92,246,0.12); color:#8B5CF6;">抽象艺术</span>
-              <span class="text-[10px] text-gray-500">¥3–15</span>
-              <span class="text-[10px] text-gray-500">★ 4.3</span>
-            </div>
-            <h4 class="font-bold text-white">「液态金属」类抽象主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>3D 渲染的抽象形态（流体/光效/几何体）。渐变 + 毛玻璃 + 弥散光三大技法。视觉冲击力强但「不耐看」——用户平均使用周期 2-4 周后更换。部分主题有基础粒子效果。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 艺术感</span><span class="text-gray-500">✅ 技术展示</span><span class="text-gray-600">✗ 不耐看</span><span class="text-gray-600">✗ 高能耗</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">山海经</h4>
+            <span class="text-[10px] text-gray-600">中国风 · 神兽插画主题</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          传统神话生物作为壁纸主体。有角色，有故事，有文化厚度。但神兽被封印在壁纸里——它不能动，不能反应，不能"活"。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>神兽不必只是画。它可以根据系统状态变化姿态——内存紧张时它警觉，系统空闲时它<strong class="text-gray-400 font-normal">慵懒地趴着</strong>。
         </div>
       </div>
 
-      <!-- 6. IP联名 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-n">#6</div>
+      <!-- Theme 6 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold" style="background:rgba(255,255,255,0.05); color:#999;">6</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(249,115,22,0.12); color:#F97316;">IP 联名</span>
-              <span class="text-[10px] text-gray-500">¥12–30</span>
-              <span class="text-[10px] text-gray-500">★ 4.6</span>
-            </div>
-            <h4 class="font-bold text-white">热门 IP 联名主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>IP 官方素材直接应用——壁纸=海报级插画，图标=IP 元素贴图。价格最高但复购率低。最大问题是「主题=粉丝周边」——<strong class="text-white">IP 形象完全不与用户互动</strong>。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 粉丝经济</span><span class="text-gray-500">✅ 高付费意愿</span><span class="text-gray-600">✗ 高定价</span><span class="text-gray-600">✗ 零互动</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">赛博都市</h4>
+            <span class="text-[10px] text-gray-600">科技未来 · 赛博朋克风格</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          霓虹光效、雨夜城市、粒子飘浮。氛围感强，但角色缺席——城市场景里没有居民，霓虹灯下没有人。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>给城市一个居民。它是这个赛博世界的<strong class="text-gray-400 font-normal">唯一住户</strong>——你在手机外面，它在里面。你们共享这个霓虹雨夜。
         </div>
       </div>
 
-      <!-- 7. 科技未来 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-n">#7</div>
+      <!-- Theme 7 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold" style="background:rgba(255,255,255,0.05); color:#999;">7</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(14,165,233,0.12); color:#0EA5E9;">科技未来</span>
-              <span class="text-[10px] text-gray-500">¥6–12</span>
-              <span class="text-[10px] text-gray-500">★ 4.2</span>
-            </div>
-            <h4 class="font-bold text-white">「赛博」类科技主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>霓虹光效 + HUD 界面元素 + 深色底。图标模仿未来设备屏幕。均使用静态或基础粒子，<strong class="text-white">没有真正的实时渲染或交互</strong>。视觉风格统一但缺乏深度。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 科技感</span><span class="text-gray-500">✅ 男性偏好</span><span class="text-gray-600">✗ 只有外表</span><span class="text-gray-600">✗ 供给不足</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">四季物语</h4>
+            <span class="text-[10px] text-gray-600">自然风光 · 季节变化壁纸</span>
           </div>
+        </div>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          四套壁纸分别对应春夏秋冬，用户手动切换。有季节感但无时间感——季节是用户选的，不是自然发生的。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>季节不应用户手动切换。让角色<strong class="text-gray-400 font-normal">自己感受时间</strong>——不是四张壁纸，而是一个随真实季节缓慢变化的生命。
         </div>
       </div>
 
-      <!-- 8. 节日限定 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="rank-badge rank-n">#8</div>
+      <!-- Theme 8 -->
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold" style="background:rgba(255,255,255,0.05); color:#999;">8</span>
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2 py-0.5 text-[10px] rounded-full" style="background:rgba(236,72,153,0.12); color:#EC4899;">节日限定</span>
-              <span class="text-[10px] text-gray-500">免费–¥6</span>
-              <span class="text-[10px] text-gray-500">★ 4.0</span>
-            </div>
-            <h4 class="font-bold text-white">春节 / 圣诞限定主题</h4>
-            <p class="text-xs text-gray-500 font-light mt-2 leading-relaxed">
-              <strong class="text-white">设计模式：</strong>节日元素叠加——红色/绿色主色调、节日符号图标。生命周期极短（2-3 周），用户过节后换回。没有任何主题做<strong class="text-white">自动节日感知</strong>——用户需手动下载和切换。
-            </p>
-            <div class="mt-3 flex gap-2 text-[10px]">
-              <span class="text-gray-500">✅ 节日氛围</span><span class="text-gray-500">✅ 免费居多</span><span class="text-gray-600">✗ 短命</span><span class="text-gray-600">✗ 需手动切换</span>
-            </div>
+            <h4 class="font-bold text-white text-sm">汪汪立大功</h4>
+            <span class="text-[10px] text-gray-600">IP 联名 · 动画 IP 主题</span>
           </div>
         </div>
-      </div>
-
-      <!-- 综合对比 -->
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl md:col-span-2" style="border-color: rgba(206,14,45,0.15); background: rgba(206,14,45,0.02);">
-        <h4 class="font-bold text-white text-lg mb-5">八类主题综合对比 · 萌主可切入维度</h4>
-        <div class="overflow-x-auto">
-          <table class="w-full hw-table">
-            <thead>
-              <tr><th>类型</th><th>视觉冲击</th><th>交互深度</th><th>情感连接</th><th>技术壁垒</th><th>持久性</th><th>萌主可超越</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-white font-medium text-xs">自然风光</td>
-                <td class="text-gray-400">★★★★★</td><td class="text-gray-400">☆☆☆☆☆</td><td class="text-gray-400">★★★☆☆</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★★☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(34,197,94,0.15); color:#22C55E;">环境材质响应</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">极简商务</td>
-                <td class="text-gray-400">★★☆☆☆</td><td class="text-gray-400">☆☆☆☆☆</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★★★★</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(34,197,94,0.15); color:#22C55E;">专注模式口袋</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">卡通萌宠</td>
-                <td class="text-gray-400">★★★☆☆</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★★★☆</td><td class="text-gray-400">★★☆☆☆</td><td class="text-gray-400">★★☆☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(206,14,45,0.15); color:#CE0E2D;">全维度超越</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">中国风</td>
-                <td class="text-gray-400">★★★★☆</td><td class="text-gray-400">☆☆☆☆☆</td><td class="text-gray-400">★★★☆☆</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★★☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(139,92,246,0.15); color:#8B5CF6;">节日自动感知</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">抽象艺术</td>
-                <td class="text-gray-400">★★★★★</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★☆☆☆</td><td class="text-gray-400">★★☆☆☆</td><td class="text-gray-400">★★☆☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(34,197,94,0.15); color:#22C55E;">Shader 实时渲染</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">IP 联名</td>
-                <td class="text-gray-400">★★★★★</td><td class="text-gray-400">☆☆☆☆☆</td><td class="text-gray-400">★★★★★</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★☆☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(206,14,45,0.15); color:#CE0E2D;">角色可互动</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">科技未来</td>
-                <td class="text-gray-400">★★★★☆</td><td class="text-gray-400">★☆☆☆☆</td><td class="text-gray-400">★★☆☆☆</td><td class="text-gray-400">★★☆☆☆</td><td class="text-gray-400">★★★☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(206,14,45,0.15); color:#CE0E2D;">真正的技术实现</span></td>
-              </tr>
-              <tr>
-                <td class="text-white font-medium text-xs">节日限定</td>
-                <td class="text-gray-400">★★★★☆</td><td class="text-gray-400">☆☆☆☆☆</td><td class="text-gray-400">★★★☆☆</td><td class="text-gray-400">☆☆☆☆☆</td><td class="text-gray-400">★☆☆☆☆</td>
-                <td><span class="text-[10px] px-2 py-0.5 rounded-full" style="background:rgba(201,160,99,0.15); color:#C9A063;">自动+本地计算</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <p class="text-xs text-gray-500 font-light leading-relaxed mb-4">
+          IP 角色天然有性格——但性格是既定的，与用户无关。它在原作里救火，在你的手机里只是贴纸。
+        </p>
+        <div class="p-3 rounded-lg text-[11px]" style="background:rgba(212,165,116,0.04);">
+          <span style="color:#D4A574;">室友缺口：</span>IP 角色进入手机后，应该获得<strong class="text-gray-400 font-normal">第二种生活</strong>——不是原作剧情的延续，而是在你的系统里长出新的日常。
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== 差距分析 ==================== -->
-<section id="gap" class="py-32 px-8" style="background: #0A0A0D;">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-1 h-8 rounded-full" style="background:#CE0E2D;"></div>
-        <span class="text-[10px] tracking-[0.3em] text-gray-500 font-light uppercase">Gap Analysis</span>
-      </div>
-      <h2 class="text-4xl font-black text-white tracking-tight mb-2">差距分析与<strong class="hw-gradient-text">我们的机会</strong></h2>
-      <p class="text-gray-500 font-light">Top 50 主题中普遍存在的空白，正是萌主的切入点</p>
+<!-- ==================== 设计机会 ==================== -->
+<section id="opportunity" class="py-36 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-20">
+      <span class="text-[10px] tracking-[0.25em] text-gray-600 font-light uppercase block mb-6">Design Opportunity</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">设计<span class="amber-gradient">机会空间</span></h2>
+      <p class="text-gray-500 font-light max-w-xl">六个缺失维度就是六个独占优势。不是追赶，而是开创。</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-5 mb-10">
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(206,14,45,0.08);">
-          <i class="fa fa-ban text-lg" style="color:#CE0E2D;"></i>
-        </div>
-        <h4 class="font-bold text-white text-lg mb-3">缺失 1：<br>零环境感知</h4>
-        <p class="text-sm text-gray-400 font-light leading-relaxed">
-          Top 50 中<span class="text-white font-medium">没有任何主题</span>使用传感器数据。光线、声音、天气、时段、位置——这些 HarmonyOS 已经开放的 API，在主题领域完全未被利用。所有主题都是「脱离环境的画」。
-        </p>
-        <div class="mt-4 p-3 rounded-lg text-xs" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white font-medium">萌主对策：</span>五维感知 → 12 维材质参数连续映射
-        </div>
-      </div>
-
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(206,14,45,0.08);">
-          <i class="fa fa-ban text-lg" style="color:#CE0E2D;"></i>
-        </div>
-        <h4 class="font-bold text-white text-lg mb-3">缺失 2：<br>零系统功能耦合</h4>
-        <p class="text-sm text-gray-400 font-light leading-relaxed">
-          主题与系统功能<span class="text-white font-medium">完全割裂</span>。下载进度、专注模式、设备流转、低电量——这些系统级事件发生后，主题毫无反应。主题只存在于「视觉层」，从未进入「功能层」。
-        </p>
-        <div class="mt-4 p-3 rounded-lg text-xs" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white font-medium">萌主对策：</span>进度条律动、通知口袋、设备跑动动画
+    <div class="space-y-6">
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-8">
+        <div class="flex items-start gap-6">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(212,165,116,0.06);">
+            <span class="font-black text-lg" style="color:#D4A574;">01</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-lg mb-2">环境感知 → 角色有自己的时间感</h3>
+            <p class="text-sm text-gray-500 font-light leading-relaxed">
+              现有：0 款主题感知环境。机会：光线、天气、时段直接影响角色的身体状态和材质。它的"一天"是真实的一天。
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(206,14,45,0.08);">
-          <i class="fa fa-ban text-lg" style="color:#CE0E2D;"></i>
-        </div>
-        <h4 class="font-bold text-white text-lg mb-3">缺失 3：<br>零长期进化</h4>
-        <p class="text-sm text-gray-400 font-light leading-relaxed">
-          所有主题安装后<span class="text-white font-medium">永不变</span>。角色主题不会「认识你」，不会「成长」。用户用 6 个月和用 6 天看到的完全一样。这违背了人类与角色建立关系的基本心理模型。
-        </p>
-        <div class="mt-4 p-3 rounded-lg text-xs" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white font-medium">萌主对策：</span>6 维人格参数 + 成就系统 + 节日自动感知
-        </div>
-      </div>
-
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(206,14,45,0.08);">
-          <i class="fa fa-ban text-lg" style="color:#CE0E2D;"></i>
-        </div>
-        <h4 class="font-bold text-white text-lg mb-3">缺失 4：<br>零内容感知</h4>
-        <p class="text-sm text-gray-400 font-light leading-relaxed">
-          用户在<span class="text-white font-medium">看视频、玩游戏、听音乐</span>时主题完全不变。这三者覆盖了手机娱乐 80% 以上的时长。主题始终是一个「旁观者」而不是「参与者」。
-        </p>
-        <div class="mt-4 p-3 rounded-lg text-xs" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white font-medium">萌主对策：</span>闯入式演出——视频/游戏/音乐/直播四大子场景
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-8">
+        <div class="flex items-start gap-6">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(212,165,116,0.06);">
+            <span class="font-black text-lg" style="color:#D4A574;">02</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-lg mb-2">功能耦合 → 角色用身体表达系统状态</h3>
+            <p class="text-sm text-gray-500 font-light leading-relaxed">
+              现有：主题与系统功能完全隔离。机会：通知积压 → 口袋鼓起，下载进度 → 角色在旁帮忙，低电量 → 角色犯困。数据变成身体语言。
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(206,14,45,0.08);">
-          <i class="fa fa-ban text-lg" style="color:#CE0E2D;"></i>
-        </div>
-        <h4 class="font-bold text-white text-lg mb-3">缺失 5：<br>零多设备仪式感</h4>
-        <p class="text-sm text-gray-400 font-light leading-relaxed">
-          跨设备协同是 HarmonyOS 的<span class="text-white font-medium">核心卖点</span>，但现有主题对此完全无感知。手机和平板用同一主题只是「分别显示」，没有任何联动仪式。
-        </p>
-        <div class="mt-4 p-3 rounded-lg text-xs" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white font-medium">萌主对策：</span>设备流转——萌主从一块屏幕跑向另一块
+      <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-8">
+        <div class="flex items-start gap-6">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(212,165,116,0.06);">
+            <span class="font-black text-lg" style="color:#D4A574;">03</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-lg mb-2">长期演化 → 用户见证而非养成</h3>
+            <p class="text-sm text-gray-500 font-light leading-relaxed">
+              现有：0 款主题随时间变化。机会：角色的性格向量随用户行为缓慢漂移——不可逆、不完全可控。三个月后，每个用户的角色都不同。
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="bg-hw-card border border-white/[0.04] p-7 rounded-2xl card-lift">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(206,14,45,0.08);">
-          <i class="fa fa-ban text-lg" style="color:#CE0E2D;"></i>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 text-center">
+          <div class="text-2xl font-black mb-2" style="color:#D4A574;">04</div>
+          <h4 class="font-bold text-white text-sm mb-2">内容感知</h4>
+          <p class="text-[11px] text-gray-500 font-light">角色知道你<br>在听什么、看什么</p>
         </div>
-        <h4 class="font-bold text-white text-lg mb-3">缺失 6：<br>弱实时渲染</h4>
-        <p class="text-sm text-gray-400 font-light leading-relaxed">
-          仅 6% 有实时渲染，且全部为基础粒子/波浪。没有任何主题使用<span class="text-white font-medium">Shader 材质参数</span>来改变角色外观。材质变化是萌主区别于所有主题的<span class="text-white font-medium">核心技术壁垒</span>。
-        </p>
-        <div class="mt-4 p-3 rounded-lg text-xs" style="background:rgba(206,14,45,0.05);">
-          <span class="text-white font-medium">萌主对策：</span>12 维 PBR Shader + 6 种粒子 + 顶点噪声
+        <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 text-center">
+          <div class="text-2xl font-black mb-2" style="color:#D4A574;">05</div>
+          <h4 class="font-bold text-white text-sm mb-2">多设备仪式</h4>
+          <p class="text-[11px] text-gray-500 font-light">角色走过屏幕<br>同一实例，不同表面</p>
+        </div>
+        <div class="bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-6 text-center">
+          <div class="text-2xl font-black mb-2" style="color:#D4A574;">06</div>
+          <h4 class="font-bold text-white text-sm mb-2">实时身体</h4>
+          <p class="text-[11px] text-gray-500 font-light">Shader 驱动的<br>会累会忙会打盹</p>
         </div>
       </div>
     </div>
 
-    <!-- 总结 -->
-    <div class="bg-hw-card border border-white/[0.04] p-8 rounded-2xl text-center" style="background: radial-gradient(ellipse at 50% 0%, rgba(206,14,45,0.06), transparent 60%);">
-      <h3 class="text-2xl font-black text-white mb-4">六重空白 = 六个独占优势</h3>
-      <p class="text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
-        现有 Top 50 主题在<span class="text-white">感知、交互、进化、内容、协同、渲染</span>六个维度上存在系统性的功能空白。这恰好构成了萌主的六个独占能力维度——不是「更好的主题」，而是<span class="text-white font-medium">全新的品类</span>。
+    <blockquote class="insight mt-12">
+      "所有 50 款主题都在做同一件事——成为更好的皮肤。<br>萌主做的是另一件事——成为系统里的第一个室友。"
+    </blockquote>
+
+    <!-- conclusion -->
+    <div class="mt-16 bg-[#0E0E12] border border-white/[0.02] rounded-2xl p-10 text-center" style="background: radial-gradient(ellipse at 50% 0%, rgba(212,165,116,0.04), transparent 60%);">
+      <p class="serif text-xl text-gray-400 font-medium leading-relaxed">
+        这个市场没有竞争。<br>
+        因为没有人<strong class="text-white">在这个方向上竞争</strong>。
+      </p>
+      <p class="text-sm text-gray-600 font-light mt-4">
+        竞品分析的传统目的是"找到差距并追赶"。<br>
+        本文的结论恰好相反：差距太大，大到无需追赶——<strong class="text-gray-400 font-normal">直接定义新品类</strong>。
       </p>
     </div>
   </div>
 </section>
 
 <!-- ==================== 页脚 ==================== -->
-<footer class="border-t border-white/[0.04] py-12 px-8">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<footer class="border-t border-white/[0.03] py-12 px-8">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <div class="flex items-center gap-4">
-      <span class="text-[10px] tracking-[0.2em] text-gray-600 font-light">HUAWEI × 华为主题创新设计</span>
-      <span class="w-[1px] h-3 bg-white/[0.06]"></span>
-      <span class="text-xs text-gray-500 font-light">竞品分析报告 · Week 1 产出</span>
+      <span class="text-[10px] tracking-[0.2em] text-gray-600 font-light">HUAWEI × 系统中的室友</span>
+      <span class="w-[1px] h-3 bg-white/[0.04]"></span>
+      <span class="text-xs text-gray-600 font-light">竞品分析报告 · Week 1 产出</span>
     </div>
-    <div class="flex gap-6 text-[10px] text-gray-600 font-light tracking-wider">
+    <div class="flex gap-6 text-[10px] text-gray-700 font-light tracking-wider">
       <span>分析 50 款主题</span>
       <span>覆盖 8 大类别</span>
-      <span>提取 12 项功能维度</span>
+      <span>6 维缺失框架</span>
+      <span>0 款具有角色属性</span>
     </div>
   </div>
 </footer>
 
-</div><!-- /lg:ml-[200px] -->
+</div><!-- /lg:ml-[220px] -->
 
 <script>
 (function(){
   const links = document.querySelectorAll('.sidebar-link');
-  const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+  const sections = [...links].map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
 
   function update(){
-    const scrollY = window.scrollY + 120;
+    const scrollY = window.scrollY + 160;
     let current = sections[0];
     for (const sec of sections) {
       if (sec && sec.offsetTop <= scrollY) current = sec;
@@ -909,6 +820,5 @@ html { scroll-behavior: smooth; }
   update();
 })();
 </script>
-
 </body>
 </html>
