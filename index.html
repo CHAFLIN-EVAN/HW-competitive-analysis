@@ -44,9 +44,9 @@ tailwind.config = {
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-* { font-family: 'Noto Sans SC', 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+* { font-family: 'Noto Serif SC', 'Inter', 'PingFang SC', 'Microsoft YaHei', 'SimSun', serif; }
 html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #F5F4F1; }
@@ -207,7 +207,7 @@ blockquote.insight {
     <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight animate-fade-up" style="animation-delay:0.1s;">
       不是更好的<span class="sage-gradient">皮肤</span>
     </h1>
-    <p class="text-lg md:text-xl text-gray-500 font-light leading-relaxed max-w-xl mb-3 animate-fade-up" style="animation-delay:0.25s;">
+    <p class="text-lg md:text-xl text-gray-500 font-normal leading-relaxed max-w-xl mb-3 animate-fade-up" style="animation-delay:0.25s;">
       HarmonyOS 主题商店 Top 50 分析——<br>从"系统角色"的视角重新提问
     </p>
     <p class="text-sm text-gray-400 font-light max-w-lg animate-fade-up" style="animation-delay:0.4s;">
@@ -225,7 +225,7 @@ blockquote.insight {
       传统的竞品分析问"它们做得怎么样"。<br>本文问：<span class="text-gray-800">"它们的角色，有自己的生活吗？"</span>
     </p>
 
-    <div class="space-y-6 text-gray-500 font-light leading-relaxed">
+    <div class="space-y-6 text-gray-500 font-normal leading-relaxed">
       <p>主流主题分析的框架围绕视觉质量、功能数量、用户满意度展开。这种分析把主题当作<strong class="text-gray-600 font-normal">静态产品</strong>来评估。</p>
       <p>但如果我们接受一个前提——主题不只是皮肤，而是<strong class="text-gray-800 font-normal">操作系统中的角色</strong>——那么评估框架需要彻底改变。我们需要问的不是"它好不好看"，而是：</p>
     </div>
@@ -265,7 +265,7 @@ blockquote.insight {
     <div class="mb-20">
       <span class="text-[10px] tracking-[0.25em] text-gray-400 font-light uppercase block mb-6">Universal Absences</span>
       <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-6">六大<span class="sage-gradient">系统性缺失</span></h2>
-      <p class="text-gray-500 font-light max-w-xl">在 Top 50 主题中，这六个维度上没有任何主题得分 > 0%。不是做得不好——是根本没有做。</p>
+      <p class="text-gray-500 font-normal max-w-xl">在 Top 50 主题中，这六个维度上没有任何主题得分 > 0%。不是做得不好——是根本没有做。</p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -276,7 +276,7 @@ blockquote.insight {
         </div>
         <h3 class="font-bold text-gray-800 text-base mb-3">缺失 1：零环境感知</h3>
         <div class="text-3xl font-black mb-3" style="color:#B0C4B0;">0/50</div>
-        <p class="text-xs text-gray-500 font-light leading-relaxed">
+        <p class="text-xs text-gray-500 font-normal leading-relaxed">
           没有任何主题感知光线、天气、时段。所有主题都是<strong class="text-gray-600 font-normal">"盲的"</strong>——角色不知道外面是天亮还是天黑，因为根本没有角色。
         </p>
         <div class="mt-4 pt-3 border-t border-gray-100">
@@ -291,7 +291,7 @@ blockquote.insight {
         </div>
         <h3 class="font-bold text-gray-800 text-base mb-3">缺失 2：零系统功能耦合</h3>
         <div class="text-3xl font-black mb-3" style="color:#B0C4B0;">0/50</div>
-        <p class="text-xs text-gray-500 font-light leading-relaxed">
+        <p class="text-xs text-gray-500 font-normal leading-relaxed">
           主题与系统功能<strong class="text-gray-600 font-normal">完全隔离</strong>。文件下载、通知堆积、设备流转——这些系统事件没有任何视觉表达。主题是皮肤，不是身体。
         </p>
         <div class="mt-4 pt-3 border-t border-gray-100">
@@ -306,7 +306,7 @@ blockquote.insight {
         </div>
         <h3 class="font-bold text-gray-800 text-base mb-3">缺失 3：零长期演化</h3>
         <div class="text-3xl font-black mb-3" style="color:#B0C4B0;">0/50</div>
-        <p class="text-xs text-gray-500 font-light leading-relaxed">
+        <p class="text-xs text-gray-500 font-normal leading-relaxed">
           今天是这个主题，明天也是。一个月后<strong class="text-gray-600 font-normal">一模一样</strong>。没有任何主题会因为时间推移而变化——它们没有记忆、没有年龄、没有经历。
         </p>
         <div class="mt-4 pt-3 border-t border-gray-100">
@@ -321,7 +321,7 @@ blockquote.insight {
         </div>
         <h3 class="font-bold text-gray-800 text-base mb-3">缺失 4：零内容感知</h3>
         <div class="text-3xl font-black mb-3" style="color:#B0C4B0;">0/50</div>
-        <p class="text-xs text-gray-500 font-light leading-relaxed">
+        <p class="text-xs text-gray-500 font-normal leading-relaxed">
           用户在听歌、看视频、玩游戏——主题<strong class="text-gray-600 font-normal">完全不知道</strong>。没有任何主题对内容做出反应。皮肤没有耳朵，也没有情绪。
         </p>
         <div class="mt-4 pt-3 border-t border-gray-100">
@@ -336,7 +336,7 @@ blockquote.insight {
         </div>
         <h3 class="font-bold text-gray-800 text-base mb-3">缺失 5：零多设备仪式感</h3>
         <div class="text-3xl font-black mb-3" style="color:#B0C4B0;">0/50</div>
-        <p class="text-xs text-gray-500 font-light leading-relaxed">
+        <p class="text-xs text-gray-500 font-normal leading-relaxed">
           手机换平板——主题是<strong class="text-gray-600 font-normal">两个独立的副本</strong>。没有任何主题体现设备流转的连续性。角色不能"走过屏幕"。
         </p>
         <div class="mt-4 pt-3 border-t border-gray-100">
@@ -351,7 +351,7 @@ blockquote.insight {
         </div>
         <h3 class="font-bold text-gray-800 text-base mb-3">缺失 6：弱实时渲染</h3>
         <div class="text-3xl font-black mb-3" style="color:#B0C4B0;">3/50</div>
-        <p class="text-xs text-gray-500 font-light leading-relaxed">
+        <p class="text-xs text-gray-500 font-normal leading-relaxed">
           仅 6%（3 款）有实时渲染元素，且全部为基础粒子/波浪。无 Shader 材质、无顶点动画、<strong class="text-gray-600 font-normal">无身体</strong>。
         </p>
         <div class="mt-4 pt-3 border-t border-gray-100">
@@ -368,7 +368,7 @@ blockquote.insight {
     <div class="mb-20">
       <span class="text-[10px] tracking-[0.25em] text-gray-400 font-light uppercase block mb-6">Availability Spectrum</span>
       <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-6">可用性<span class="sage-gradient">光谱</span></h2>
-      <p class="text-gray-500 font-light max-w-xl">将所有 50 款主题映射到"可用性"轴上——从完全被动到具备自主节奏。我们发现整个行业集中在最左侧。</p>
+      <p class="text-gray-500 font-normal max-w-xl">将所有 50 款主题映射到"可用性"轴上——从完全被动到具备自主节奏。我们发现整个行业集中在最左侧。</p>
     </div>
 
     <div class="mb-16">
@@ -389,7 +389,7 @@ blockquote.insight {
 
     <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
       <h3 class="font-bold text-gray-800 text-sm mb-4">光谱解读</h3>
-      <div class="space-y-4 text-sm text-gray-500 font-light leading-relaxed">
+      <div class="space-y-4 text-sm text-gray-500 font-normal leading-relaxed">
         <p>Top 50 主题<strong class="text-gray-600 font-normal">全部</strong>位于频谱最左端——它们是<strong class="text-gray-600 font-normal">完全被动的视觉资产</strong>。用户选择、应用、更换——主题不做任何事，它只是存在。</p>
         <p>没有任何主题具备"状态"的概念——它不知道系统在干什么，不知道现在是什么时间，不知道这是用户第几次使用它。<strong class="text-gray-700 font-normal">它没有记忆，没有节奏，没有身体。</strong></p>
         <p>频谱右侧——"独立生活"——目前<strong class="text-gray-600 font-normal">完全空白</strong>。这恰好是萌主的独占空间：一个拥有自己节奏、会累会忙、不完全受控的系统级角色。</p>
@@ -404,7 +404,7 @@ blockquote.insight {
     <div class="mb-20">
       <span class="text-[10px] tracking-[0.25em] text-gray-400 font-light uppercase block mb-6">Category Re-examination</span>
       <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-6">八类主题<span class="sage-gradient">室友视角</span>审视</h2>
-      <p class="text-gray-500 font-light max-w-xl">不是评估美学质量，而是追问每类主题距离"系统角色"有多远。</p>
+      <p class="text-gray-500 font-normal max-w-xl">不是评估美学质量，而是追问每类主题距离"系统角色"有多远。</p>
     </div>
 
     <div class="space-y-3">
@@ -541,7 +541,7 @@ blockquote.insight {
     <div class="mb-20">
       <span class="text-[10px] tracking-[0.25em] text-gray-400 font-light uppercase block mb-6">Embodied Metaphor Assessment</span>
       <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-6">身体隐喻<span class="sage-gradient">能力评估</span></h2>
-      <p class="text-gray-500 font-light max-w-xl">系统状态可以通过角色的身体来表达——口袋变鼓 = 通知多，打瞌睡 = 深夜。现有主题在这方面的能力如何？</p>
+      <p class="text-gray-500 font-normal max-w-xl">系统状态可以通过角色的身体来表达——口袋变鼓 = 通知多，打瞌睡 = 深夜。现有主题在这方面的能力如何？</p>
     </div>
 
     <div class="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-sm">
@@ -595,7 +595,7 @@ blockquote.insight {
     </div>
 
     <div class="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-      <p class="text-sm text-gray-500 font-light leading-relaxed">
+      <p class="text-sm text-gray-500 font-normal leading-relaxed">
         <strong class="text-gray-700 font-medium">关键发现：</strong>卡通萌宠和 IP 联名有"身体"（角色形象），但<strong class="text-gray-600 font-normal">没有一项能力超过"有身体"这个层面</strong>。它们不会累、不会忙、不会因为通知多了而口袋鼓起。有身体而无行为——这是最接近室友的类别，也恰恰是最暴露差距的类别。
       </p>
     </div>
@@ -608,7 +608,7 @@ blockquote.insight {
     <div class="mb-20">
       <span class="text-[10px] tracking-[0.25em] text-gray-400 font-light uppercase block mb-6">Design Opportunity</span>
       <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-6">设计<span class="sage-gradient">机会空间</span></h2>
-      <p class="text-gray-500 font-light max-w-xl">六个缺失维度就是六个独占优势。不是追赶，而是开创。</p>
+      <p class="text-gray-500 font-normal max-w-xl">六个缺失维度就是六个独占优势。不是追赶，而是开创。</p>
     </div>
 
     <div class="space-y-5">
@@ -619,7 +619,7 @@ blockquote.insight {
           </div>
           <div>
             <h3 class="font-bold text-gray-800 text-lg mb-2">环境感知 → 角色有自己的时间感</h3>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">现有：0 款主题感知环境。机会：光线、天气、时段直接影响角色的身体状态和材质。它的"一天"是真实的一天。</p>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">现有：0 款主题感知环境。机会：光线、天气、时段直接影响角色的身体状态和材质。它的"一天"是真实的一天。</p>
           </div>
         </div>
       </div>
@@ -631,7 +631,7 @@ blockquote.insight {
           </div>
           <div>
             <h3 class="font-bold text-gray-800 text-lg mb-2">功能耦合 → 角色用身体表达系统状态</h3>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">现有：主题与系统功能完全隔离。机会：通知积压 → 口袋鼓起，下载进度 → 角色在旁帮忙，低电量 → 角色犯困。数据变成身体语言。</p>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">现有：主题与系统功能完全隔离。机会：通知积压 → 口袋鼓起，下载进度 → 角色在旁帮忙，低电量 → 角色犯困。数据变成身体语言。</p>
           </div>
         </div>
       </div>
@@ -643,7 +643,7 @@ blockquote.insight {
           </div>
           <div>
             <h3 class="font-bold text-gray-800 text-lg mb-2">长期演化 → 用户见证而非养成</h3>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">现有：0 款主题随时间变化。机会：角色的性格向量随用户行为缓慢漂移——不可逆、不完全可控。三个月后，每个用户的角色都不同。</p>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">现有：0 款主题随时间变化。机会：角色的性格向量随用户行为缓慢漂移——不可逆、不完全可控。三个月后，每个用户的角色都不同。</p>
           </div>
         </div>
       </div>
@@ -719,7 +719,7 @@ blockquote.insight {
     <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] mt-6 mb-4 tracking-tight">
       与<span class="serif sage-gradient">"非可用的伴侣"</span>概念相似的<br>Steam 游戏分析
     </h1>
-    <p class="text-gray-500 font-light max-w-xl leading-relaxed">
+    <p class="text-gray-500 font-normal max-w-xl leading-relaxed">
       在 Steam 平台搜索桌面宠物、自主角色、见证式体验等品类，筛选出与四大设计原则最为接近的游戏，进行横向对比。
     </p>
   </div>
@@ -772,7 +772,7 @@ blockquote.insight {
             <h3 class="text-xl font-bold text-gray-800">Mountain</h3>
             <span class="text-[10px] text-gray-400">David OReilly · 2014</span>
           </div>
-          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+          <p class="text-sm text-gray-500 font-normal leading-relaxed mb-4">
             "存在主义自然模拟器"。玩家对山没有实质控制权——只能旋转视角、缩放。<br>
             时间向前流动，万物生长消亡，季节自行更替。著名评测："你做什么都不重要，但你还是会对它着迷。"
           </p>
@@ -800,7 +800,7 @@ blockquote.insight {
             <h3 class="text-xl font-bold text-gray-800">Desktop Goose</h3>
             <span class="text-[10px] text-gray-400">Samperson · 2020</span>
           </div>
-          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+          <p class="text-sm text-gray-500 font-normal leading-relaxed mb-4">
             一只在桌面上自主捣乱的鹅——拖拽窗口、叼走鼠标光标、留下泥脚印。<br>
             完全无视你的意愿，随心所欲。是最接近"它在做自己的事"的商业案例。
           </p>
@@ -828,7 +828,7 @@ blockquote.insight {
             <h3 class="text-xl font-bold text-gray-800">Placid Plastic Duck Simulator</h3>
             <span class="text-[10px] text-gray-400">turbolento games · 2023</span>
           </div>
-          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+          <p class="text-sm text-gray-500 font-normal leading-relaxed mb-4">
             你只是看着橡皮鸭在泳池里漂浮。无法控制，无法养成，纯观察。<br>
             鸭子们完全按自己的节奏存在——它们在度假，你只是碰巧在场。
           </p>
@@ -856,7 +856,7 @@ blockquote.insight {
             <h3 class="text-xl font-bold text-gray-800">Rusty's Retirement</h3>
             <span class="text-[10px] text-gray-400">Mister Morris Games · 2024</span>
           </div>
-          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+          <p class="text-sm text-gray-500 font-normal leading-relaxed mb-4">
             放置在屏幕底部的放置类农场。作物自行生长，机器人自动化劳作。<br>
             它占据屏幕的一小条空间，与你"各忙各的"——你工作，它也在工作。
           </p>
@@ -884,7 +884,7 @@ blockquote.insight {
             <h3 class="text-xl font-bold text-gray-800">Spirit City: Lofi Sessions</h3>
             <span class="text-[10px] text-gray-400">Mooncube Games · 2024</span>
           </div>
-          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+          <p class="text-sm text-gray-500 font-normal leading-relaxed mb-4">
             生产力工具 + 虚拟陪伴精灵。有可爱角色陪伴在侧，Lofi 音乐播放，番茄钟计时。<br>
             但精灵永远"可用"，不会累、不会拒绝、不会在深夜翻个身继续睡。
           </p>
@@ -969,7 +969,7 @@ blockquote.insight {
     <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-8">
       非可用的伴侣<span class="sage-gradient">填补了一个空白</span>
     </h2>
-    <p class="text-gray-500 font-light leading-relaxed mb-6">
+    <p class="text-gray-500 font-normal leading-relaxed mb-6">
       Steam 上有角色自主节奏的游戏（Mountain、Desktop Goose）、有桌面级存在的工具（Rusty's、Spirit City），
       也有纯见证式的体验（PPD Simulator）——但<b class="text-gray-700 font-normal">没有任何一款</b>同时做到：
     </p>
