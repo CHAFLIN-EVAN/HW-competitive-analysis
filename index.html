@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>竞品分析 · 系统角色视角下的 HarmonyOS 主题商店 Top 50</title>
+<title>非可用的伴侣 · 竞品分析与 Steam 游戏调研</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <script>
@@ -57,9 +57,35 @@ html { scroll-behavior: smooth; }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
+/* ===== 顶部导航 ===== */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: 56px;
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  background: rgba(245,244,241,0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid #E5E0DA;
+}
+.nav-tab {
+  padding: 14px 32px; font-size: 13px; font-weight: 500;
+  color: #A0A0A0; letter-spacing: 0.05em;
+  transition: all 0.3s ease; cursor: pointer;
+  border-bottom: 2px solid transparent; background: none;
+  font-family: inherit;
+}
+.nav-tab:hover { color: #5A5A5A; }
+.nav-tab.active {
+  color: #7A9A7A;
+  border-bottom-color: #A0B4A0;
+}
+.nav-divider {
+  width: 1px; height: 18px; background: #E5E0DA;
+}
+
+/* ===== 侧边栏 ===== */
 .sidebar {
-  position: fixed; left: 0; top: 0; bottom: 0; width: 220px; z-index: 40;
-  padding: 140px 0 40px;
+  position: fixed; left: 0; top: 56px; bottom: 0; width: 220px; z-index: 40;
+  padding: 40px 0;
   background: rgba(245,244,241,0.95);
   border-right: 1px solid #E5E0DA;
   display: flex; flex-direction: column; overflow-y: auto;
@@ -110,12 +136,45 @@ blockquote.insight {
   height: 6px; border-radius: 3px;
   background: linear-gradient(90deg, #A0B4A0, #B0C0B0, #C0C8C0, #D0D0D0, #E0E0E0);
 }
+
+/* ===== Steam 页面专用样式 ===== */
+.game-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E0DA;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.game-card:hover {
+  border-color: rgba(160,180,160,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 12px;
+  font-size: 10px; letter-spacing: 0.03em;
+  border: 1px solid #E5E0DA;
+}
+.tag-yes { background: rgba(160,180,160,0.08); border-color: rgba(160,180,160,0.25); color: #7A9A7A; }
+.tag-no  { background: #F5F4F1; color: #A0A0A0; }
+.comparison-cell { padding: 14px 16px; font-size: 12px; }
+.comparison-cell.yes { color: #7A9A7A; background: rgba(160,180,160,0.05); }
+.comparison-cell.no  { color: #A0A0A0; }
 </style>
 </head>
 <body class="bg-[#F5F4F1] text-gray-700">
 
-<!-- ==================== 左侧导航 ==================== -->
-<aside class="sidebar">
+<!-- ==================== 顶部导航 ==================== -->
+<nav class="top-nav">
+  <button class="nav-tab active" id="nav-competitive" onclick="switchTab('competitive')">Top 50 竞品分析</button>
+  <span class="nav-divider"></span>
+  <button class="nav-tab" id="nav-steam" onclick="switchTab('steam')">Steam 游戏调研</button>
+</nav>
+
+<!-- ==================== 侧边栏（仅竞品分析用） ==================== -->
+<aside class="sidebar" id="sidebar">
   <div class="sidebar-label">分析框架</div>
   <a href="#framing" class="sidebar-link"><span class="sidebar-dot"></span>视角转换</a>
   <a href="#absences" class="sidebar-link"><span class="sidebar-dot"></span>六大缺失</a>
@@ -125,7 +184,11 @@ blockquote.insight {
   <a href="#opportunity" class="sidebar-link"><span class="sidebar-dot"></span>设计机会</a>
 </aside>
 
-<div class="lg:ml-[220px]">
+<!-- ==================== 主内容区 ==================== -->
+<div class="lg:ml-[220px]" id="main-content" style="padding-top:56px;">
+
+<!-- ========== TAB 1: 竞品分析 ========== -->
+<div id="tab-competitive">
 
 <!-- ==================== Hero ==================== -->
 <header class="min-h-[90vh] flex items-center relative overflow-hidden px-8" style="background: linear-gradient(180deg, #F8F7F5 0%, #F5F4F1 40%, #EDEBE6 100%);">
@@ -495,8 +558,7 @@ blockquote.insight {
         <tbody class="font-light">
           <tr style="border-bottom:1px solid #EEECE7;">
             <td class="p-4 text-gray-700 text-xs">有可变形体</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
             <td class="text-center p-4 text-xs font-medium" style="color:#8FAF8F;">✓</td>
             <td class="text-center p-4 text-gray-300 text-xs">—</td>
             <td class="text-center p-4 text-xs" style="color:#A0B4A0;">部分</td>
@@ -504,39 +566,27 @@ blockquote.insight {
           </tr>
           <tr style="border-bottom:1px solid #EEECE7;">
             <td class="p-4 text-gray-700 text-xs">有表情/姿态系统</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
           </tr>
           <tr style="border-bottom:1px solid #EEECE7;">
             <td class="p-4 text-gray-700 text-xs">表达系统状态</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
           </tr>
           <tr style="border-bottom:1px solid #EEECE7;">
             <td class="p-4 text-gray-700 text-xs">有时间性变化</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
           </tr>
           <tr>
             <td class="p-4 text-gray-700 text-xs">有不可用状态</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
-            <td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
+            <td class="text-center p-4 text-gray-300 text-xs">—</td><td class="text-center p-4 text-gray-300 text-xs">—</td>
           </tr>
         </tbody>
       </table>
@@ -567,9 +617,7 @@ blockquote.insight {
           </div>
           <div>
             <h3 class="font-bold text-gray-800 text-lg mb-2">环境感知 → 角色有自己的时间感</h3>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">
-              现有：0 款主题感知环境。机会：光线、天气、时段直接影响角色的身体状态和材质。它的"一天"是真实的一天。
-            </p>
+            <p class="text-sm text-gray-500 font-light leading-relaxed">现有：0 款主题感知环境。机会：光线、天气、时段直接影响角色的身体状态和材质。它的"一天"是真实的一天。</p>
           </div>
         </div>
       </div>
@@ -581,9 +629,7 @@ blockquote.insight {
           </div>
           <div>
             <h3 class="font-bold text-gray-800 text-lg mb-2">功能耦合 → 角色用身体表达系统状态</h3>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">
-              现有：主题与系统功能完全隔离。机会：通知积压 → 口袋鼓起，下载进度 → 角色在旁帮忙，低电量 → 角色犯困。数据变成身体语言。
-            </p>
+            <p class="text-sm text-gray-500 font-light leading-relaxed">现有：主题与系统功能完全隔离。机会：通知积压 → 口袋鼓起，下载进度 → 角色在旁帮忙，低电量 → 角色犯困。数据变成身体语言。</p>
           </div>
         </div>
       </div>
@@ -595,9 +641,7 @@ blockquote.insight {
           </div>
           <div>
             <h3 class="font-bold text-gray-800 text-lg mb-2">长期演化 → 用户见证而非养成</h3>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">
-              现有：0 款主题随时间变化。机会：角色的性格向量随用户行为缓慢漂移——不可逆、不完全可控。三个月后，每个用户的角色都不同。
-            </p>
+            <p class="text-sm text-gray-500 font-light leading-relaxed">现有：0 款主题随时间变化。机会：角色的性格向量随用户行为缓慢漂移——不可逆、不完全可控。三个月后，每个用户的角色都不同。</p>
           </div>
         </div>
       </div>
@@ -638,7 +682,7 @@ blockquote.insight {
   </div>
 </section>
 
-<!-- ==================== 页脚 ==================== -->
+<!-- ==================== 竞品分析页脚 ==================== -->
 <footer class="border-t border-[#E5E0DA] py-12 px-8">
   <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <div class="flex items-center gap-4">
@@ -655,14 +699,360 @@ blockquote.insight {
   </div>
 </footer>
 
-</div><!-- /lg:ml-[220px] -->
+</div><!-- /#tab-competitive -->
+
+<!-- ========== TAB 2: Steam 游戏调研 ========== -->
+<div id="tab-steam" class="hidden">
+
+<!-- Hero -->
+<header class="py-32 px-8 relative overflow-hidden" style="background: linear-gradient(180deg, #F8F7F5 0%, #F5F4F1 40%, #EDEBE6 100%);">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute w-[400px] h-[400px] rounded-full animate-breathe" style="top:20%; left:60%; background: radial-gradient(circle, rgba(160,180,160,0.1) 0%, transparent 70%);"></div>
+    <div class="absolute w-[200px] h-[200px] rounded-full animate-breathe" style="top:50%; left:30%; background: radial-gradient(circle, rgba(160,180,160,0.06) 0%, transparent 60%); animation-delay: 3s;"></div>
+  </div>
+  <div class="max-w-4xl mx-auto relative z-10">
+    <span class="text-[10px] tracking-[0.25em] text-gray-400 font-light uppercase">Steam 游戏调研</span>
+    <span class="mx-3 text-gray-300">/</span>
+    <span class="text-[10px] tracking-[0.15em] text-gray-400 font-light">2026.05.17</span>
+    <h1 class="text-3xl md:text-5xl font-black text-gray-900 leading-tight mt-6 mb-4">
+      与<span class="serif sage-gradient">"非可用的伴侣"</span>概念相似的<br>Steam 游戏分析
+    </h1>
+    <p class="text-gray-500 font-light max-w-xl leading-relaxed">
+      在 Steam 平台搜索桌面宠物、自主角色、见证式体验等品类，筛选出与四大设计原则最为接近的游戏，进行横向对比。
+    </p>
+  </div>
+</header>
+
+<!-- 研究说明 -->
+<section class="py-20 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex gap-8 flex-wrap mb-12">
+      <div class="flex-1 min-w-[200px]">
+        <span class="text-[10px] tracking-[0.2em] text-gray-400 uppercase">搜索关键词</span>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="tag tag-yes">desktop pet</span>
+          <span class="tag tag-yes">virtual pet</span>
+          <span class="tag tag-yes">idle</span>
+          <span class="tag">desktop companion</span>
+          <span class="tag">autonomous character</span>
+          <span class="tag">witness</span>
+        </div>
+      </div>
+      <div class="flex-1 min-w-[200px]">
+        <span class="text-[10px] tracking-[0.2em] text-gray-400 uppercase">筛选标准</span>
+        <div class="mt-3 space-y-1.5 text-xs text-gray-500 font-light">
+          <div>✓ 角色具有自主行为节奏</div>
+          <div>✓ 见证式体验而非养成控制</div>
+          <div>✓ 桌面/系统级陪伴属性</div>
+          <div>✓ 非传统"随时可用"工具</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 游戏卡片区 -->
+<section class="py-12 px-8" style="background: #EDEBE6;">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl font-black text-gray-800 mb-12">筛选出的 <span class="sage-gradient">5 款</span> 最相关游戏</h2>
+
+    <!-- Mountain -->
+    <div class="game-card mb-10">
+      <div class="grid md:grid-cols-[360px_1fr]">
+        <div class="relative overflow-hidden" style="min-height:240px;">
+          <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/313340/header.jpg"
+               alt="Mountain" class="w-full h-full object-cover"
+               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22460%22 height=%22215%22><rect fill=%22%23EDEBE6%22 width=%22460%22 height=%22215%22/><text fill=%22%23A0A0A0%22 x=%22230%22 y=%22110%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2214%22>Mountain</text></svg>'">
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold text-gray-800">Mountain</h3>
+            <span class="text-[10px] text-gray-400">David OReilly · 2014</span>
+          </div>
+          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+            "存在主义自然模拟器"。玩家对山没有实质控制权——只能旋转视角、缩放。<br>
+            时间向前流动，万物生长消亡，季节自行更替。著名评测："你做什么都不重要，但你还是会对它着迷。"
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag tag-yes">✓ 见证而非养成</span>
+            <span class="tag tag-yes">✓ 自主节奏</span>
+            <span class="tag tag-no">✗ 无角色关系</span>
+            <span class="tag tag-no">✗ 无系统状态隐喻</span>
+            <span class="tag tag-no">✗ 独立应用</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Goose -->
+    <div class="game-card mb-10">
+      <div class="grid md:grid-cols-[360px_1fr]">
+        <div class="relative overflow-hidden" style="min-height:240px;">
+          <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1569120/header.jpg"
+               alt="Desktop Goose" class="w-full h-full object-cover"
+               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22460%22 height=%22215%22><rect fill=%22%23EDEBE6%22 width=%22460%22 height=%22215%22/><text fill=%22%23A0A0A0%22 x=%22230%22 y=%22110%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2214%22>Desktop Goose</text></svg>'">
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold text-gray-800">Desktop Goose</h3>
+            <span class="text-[10px] text-gray-400">Samperson · 2020</span>
+          </div>
+          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+            一只在桌面上自主捣乱的鹅——拖拽窗口、叼走鼠标光标、留下泥脚印。<br>
+            完全无视你的意愿，随心所欲。是最接近"它在做自己的事"的商业案例。
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag tag-yes">✓ 自主行为</span>
+            <span class="tag tag-yes">✓ 桌面级存在</span>
+            <span class="tag tag-no">✗ 无脆弱性</span>
+            <span class="tag tag-no">✗ 无见证维度</span>
+            <span class="tag tag-no">✗ 恶搞定位</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Placid Plastic Duck Simulator -->
+    <div class="game-card mb-10">
+      <div class="grid md:grid-cols-[360px_1fr]">
+        <div class="relative overflow-hidden" style="min-height:240px;">
+          <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1999360/header.jpg"
+               alt="Placid Plastic Duck Simulator" class="w-full h-full object-cover"
+               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22460%22 height=%22215%22><rect fill=%22%23EDEBE6%22 width=%22460%22 height=%22215%22/><text fill=%22%23A0A0A0%22 x=%22230%22 y=%22110%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2214%22>Placid Plastic Duck Simulator</text></svg>'">
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold text-gray-800">Placid Plastic Duck Simulator</h3>
+            <span class="text-[10px] text-gray-400">turbolento games · 2023</span>
+          </div>
+          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+            你只是看着橡皮鸭在泳池里漂浮。无法控制，无法养成，纯观察。<br>
+            鸭子们完全按自己的节奏存在——它们在度假，你只是碰巧在场。
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag tag-yes">✓ 纯见证体验</span>
+            <span class="tag tag-yes">✓ 自主存在</span>
+            <span class="tag tag-no">✗ 无情绪/脆弱性</span>
+            <span class="tag tag-no">✗ 无系统集成</span>
+            <span class="tag tag-no">✗ 一次性体验</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rusty's Retirement -->
+    <div class="game-card mb-10">
+      <div class="grid md:grid-cols-[360px_1fr]">
+        <div class="relative overflow-hidden" style="min-height:240px;">
+          <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2666510/header.jpg"
+               alt="Rusty's Retirement" class="w-full h-full object-cover"
+               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22460%22 height=%22215%22><rect fill=%22%23EDEBE6%22 width=%22460%22 height=%22215%22/><text fill=%22%23A0A0A0%22 x=%22230%22 y=%22110%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2214%22>Rusty\'s Retirement</text></svg>'">
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold text-gray-800">Rusty's Retirement</h3>
+            <span class="text-[10px] text-gray-400">Mister Morris Games · 2024</span>
+          </div>
+          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+            放置在屏幕底部的放置类农场。作物自行生长，机器人自动化劳作。<br>
+            它占据屏幕的一小条空间，与你"各忙各的"——你工作，它也在工作。
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag tag-yes">✓ 屏幕底部共存</span>
+            <span class="tag tag-yes">✓ 各忙各的</span>
+            <span class="tag tag-no">✗ 无角色关系</span>
+            <span class="tag tag-no">✗ 无脆弱性</span>
+            <span class="tag tag-no">✗ 效率导向</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spirit City: Lofi Sessions -->
+    <div class="game-card mb-10">
+      <div class="grid md:grid-cols-[360px_1fr]">
+        <div class="relative overflow-hidden" style="min-height:240px;">
+          <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2113850/header.jpg"
+               alt="Spirit City: Lofi Sessions" class="w-full h-full object-cover"
+               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22460%22 height=%22215%22><rect fill=%22%23EDEBE6%22 width=%22460%22 height=%22215%22/><text fill=%22%23A0A0A0%22 x=%22230%22 y=%22110%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2214%22>Spirit City</text></svg>'">
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold text-gray-800">Spirit City: Lofi Sessions</h3>
+            <span class="text-[10px] text-gray-400">Mooncube Games · 2024</span>
+          </div>
+          <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+            生产力工具 + 虚拟陪伴精灵。有可爱角色陪伴在侧，Lofi 音乐播放，番茄钟计时。<br>
+            但精灵永远"可用"，不会累、不会拒绝、不会在深夜翻个身继续睡。
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag tag-yes">✓ 桌面陪伴</span>
+            <span class="tag tag-yes">✓ 视觉风格参考</span>
+            <span class="tag tag-no">✗ 永远可用</span>
+            <span class="tag tag-no">✗ 无自主节奏</span>
+            <span class="tag tag-no">✗ 无脆弱性</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 对比表格 -->
+<section class="py-24 px-8">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl font-black text-gray-800 mb-4">五维度<span class="sage-gradient">横向对比</span></h2>
+    <p class="text-sm text-gray-500 font-light mb-12 max-w-xl">
+      按照"非可用的伴侣"四大设计原则 + OS 级集成，逐项对比五款游戏。✓ = 符合，△ = 部分符合，✗ = 不符合。
+    </p>
+
+    <div class="bg-white border border-[#E5E0DA] rounded-2xl overflow-hidden shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr style="border-bottom:1px solid #E5E0DA;">
+              <th class="text-left p-5 text-[10px] tracking-wider text-gray-400 font-medium">评估维度</th>
+              <th class="text-center p-5 text-[10px] tracking-wider text-gray-400 font-medium">Mountain</th>
+              <th class="text-center p-5 text-[10px] tracking-wider text-gray-400 font-medium">Desktop Goose</th>
+              <th class="text-center p-5 text-[10px] tracking-wider text-gray-400 font-medium">PPD Simulator</th>
+              <th class="text-center p-5 text-[10px] tracking-wider text-gray-400 font-medium">Rusty's Retirement</th>
+              <th class="text-center p-5 text-[10px] tracking-wider text-gray-400 font-medium">Spirit City</th>
+              <th class="text-center p-5 text-[10px] tracking-wider font-medium" style="color:#7A9A7A;">非可用的伴侣</th>
+            </tr>
+          </thead>
+          <tbody class="font-light">
+            <tr style="border-bottom:1px solid #F0EDE8;">
+              <td class="comparison-cell text-gray-700 text-xs">① 角色自主节奏<br><span class="text-gray-400" style="font-size:10px;">有自己的生活，不总是可用</span></td>
+              <td class="comparison-cell yes text-center">✓</td><td class="comparison-cell yes text-center">✓</td><td class="comparison-cell yes text-center">✓</td>
+              <td class="comparison-cell no text-center">△</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell text-center font-bold" style="color:#7A9A7A;">✓ 核心</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F0EDE8;">
+              <td class="comparison-cell text-gray-700 text-xs">② 脆弱性塑造关系<br><span class="text-gray-400" style="font-size:10px;">会累会忙会走神，局限产生共情</span></td>
+              <td class="comparison-cell no text-center">✗</td><td class="comparison-cell no text-center">✗</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell no text-center">✗</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell text-center font-bold" style="color:#7A9A7A;">✓ 核心</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F0EDE8;">
+              <td class="comparison-cell text-gray-700 text-xs">③ 见证而非养成<br><span class="text-gray-400" style="font-size:10px;">不可逆不可控，共同经历时间</span></td>
+              <td class="comparison-cell yes text-center">✓</td><td class="comparison-cell no text-center">✗</td><td class="comparison-cell yes text-center">✓</td>
+              <td class="comparison-cell no text-center">△</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell text-center font-bold" style="color:#7A9A7A;">✓ 核心</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F0EDE8;">
+              <td class="comparison-cell text-gray-700 text-xs">④ 隐喻表达<br><span class="text-gray-400" style="font-size:10px;">身体隐喻代替数据面板</span></td>
+              <td class="comparison-cell no text-center">✗</td><td class="comparison-cell no text-center">✗</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell no text-center">✗</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell text-center font-bold" style="color:#7A9A7A;">✓ 核心</td>
+            </tr>
+            <tr>
+              <td class="comparison-cell text-gray-700 text-xs">⑤ OS 级集成<br><span class="text-gray-400" style="font-size:10px;">桌面/锁屏/专注模式跨表面存在</span></td>
+              <td class="comparison-cell no text-center">✗</td><td class="comparison-cell yes text-center">△</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell yes text-center">△</td><td class="comparison-cell no text-center">✗</td>
+              <td class="comparison-cell text-center font-bold" style="color:#7A9A7A;">✓ 核心</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 结论 -->
+<section class="py-24 px-8" style="background: linear-gradient(180deg, #F5F4F1 0%, #EDEBE6 60%, #E8EDE6 100%);">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-2xl md:text-3xl font-black text-gray-800 mb-8">
+      非可用的伴侣<span class="sage-gradient">填补了一个空白</span>
+    </h2>
+    <p class="text-gray-500 font-light leading-relaxed mb-6">
+      Steam 上有角色自主节奏的游戏（Mountain、Desktop Goose）、有桌面级存在的工具（Rusty's、Spirit City），
+      也有纯见证式的体验（PPD Simulator）——但<b class="text-gray-700 font-normal">没有任何一款</b>同时做到：
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mt-10">
+      <div class="bg-white border border-[#E5E0DA] p-6 rounded-xl shadow-sm">
+        <div class="text-2xl mb-3 opacity-20">✦</div>
+        <p class="text-sm text-gray-500 leading-relaxed">
+          让角色<b class="text-gray-700 font-normal">刻意不可用</b>——不是 bug，是设计意图
+        </p>
+      </div>
+      <div class="bg-white border border-[#E5E0DA] p-6 rounded-xl shadow-sm">
+        <div class="text-2xl mb-3 opacity-20">✦</div>
+        <p class="text-sm text-gray-500 leading-relaxed">
+          用<b class="text-gray-700 font-normal">脆弱性和局限</b>建立情感连接——而非全能工具
+        </p>
+      </div>
+      <div class="bg-white border border-[#E5E0DA] p-6 rounded-xl shadow-sm">
+        <div class="text-2xl mb-3 opacity-20">✦</div>
+        <p class="text-sm text-gray-500 leading-relaxed">
+          通过<b class="text-gray-700 font-normal">身体隐喻</b>转译系统状态——口袋鼓=通知多
+        </p>
+      </div>
+      <div class="bg-white border border-[#E5E0DA] p-6 rounded-xl shadow-sm">
+        <div class="text-2xl mb-3 opacity-20">✦</div>
+        <p class="text-sm text-gray-500 leading-relaxed">
+          作为<b class="text-gray-700 font-normal">OS 级角色</b>跨越桌面、锁屏、专注模式——它不是 APP
+        </p>
+      </div>
+    </div>
+
+    <blockquote class="insight mt-14">
+      "当所有技术都在追求更快、更可用、更无缝时——<br>
+      我们选择设计一个会累、会忙、会走神的室友。<br>
+      这不是技术的退步，而是<span style="color:#7A9A7A;">关系的进化</span>。"
+    </blockquote>
+  </div>
+</section>
+
+<!-- Steam 页脚 -->
+<footer class="border-t border-[#E5E0DA] py-10 px-8">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <span class="text-[10px] tracking-[0.2em] text-gray-400 font-light">Steam 竞品调研 · 2026.05.17</span>
+    <span class="text-[10px] text-gray-400 font-light tracking-wider">图片来自 Steam CDN · 仅用于学术研究</span>
+  </div>
+</footer>
+
+</div><!-- /#tab-steam -->
+
+</div><!-- /#main-content -->
 
 <script>
+// ===== Tab 切换 =====
+function switchTab(tab) {
+  const sidebar = document.getElementById('sidebar');
+  const main = document.getElementById('main-content');
+  const competitive = document.getElementById('tab-competitive');
+  const steam = document.getElementById('tab-steam');
+  const btnComp = document.getElementById('nav-competitive');
+  const btnSteam = document.getElementById('nav-steam');
+
+  if (tab === 'competitive') {
+    competitive.classList.remove('hidden');
+    steam.classList.add('hidden');
+    sidebar.style.display = '';
+    main.classList.add('lg:ml-[220px]');
+    btnComp.classList.add('active');
+    btnSteam.classList.remove('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // trigger sidebar update
+    updateSidebar();
+  } else {
+    competitive.classList.add('hidden');
+    steam.classList.remove('hidden');
+    sidebar.style.display = 'none';
+    main.classList.remove('lg:ml-[220px]');
+    btnSteam.classList.add('active');
+    btnComp.classList.remove('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+}
+
+// ===== 侧边栏滚动高亮 =====
 (function(){
   const links = document.querySelectorAll('.sidebar-link');
   const sections = [...links].map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
 
-  function update(){
+  window.updateSidebar = function(){
     const scrollY = window.scrollY + 160;
     let current = sections[0];
     for (const sec of sections) {
@@ -671,11 +1061,14 @@ blockquote.insight {
     links.forEach(l => l.classList.remove('active'));
     const active = document.querySelector(`.sidebar-link[href="#${current.id}"]`);
     if (active) active.classList.add('active');
-  }
+  };
 
-  window.addEventListener('scroll', update, {passive:true});
-  update();
+  window.addEventListener('scroll', updateSidebar, {passive:true});
+  updateSidebar();
 })();
+
+// 移动端：sidebar display:none 已由 CSS media query 处理
 </script>
+
 </body>
 </html>
